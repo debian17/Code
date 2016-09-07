@@ -213,6 +213,7 @@ namespace WebAPI_Client
             // 
             // FacultyCB
             // 
+            this.FacultyCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FacultyCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FacultyCB.FormattingEnabled = true;
             this.FacultyCB.Location = new System.Drawing.Point(412, 60);
@@ -223,6 +224,7 @@ namespace WebAPI_Client
             // 
             // DepartmentCB
             // 
+            this.DepartmentCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DepartmentCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DepartmentCB.FormattingEnabled = true;
             this.DepartmentCB.Location = new System.Drawing.Point(412, 133);
@@ -233,6 +235,7 @@ namespace WebAPI_Client
             // 
             // GroupCB
             // 
+            this.GroupCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GroupCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GroupCB.FormattingEnabled = true;
             this.GroupCB.Location = new System.Drawing.Point(407, 203);
