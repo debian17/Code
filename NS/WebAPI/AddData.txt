@@ -1,0 +1,78 @@
+public string AddData()
+        {
+            //Faculty F1 = new Faculty { Name = "ÈèÂÒ" };
+            //db.Faculties.Add(F1);
+            //db.SaveChanges();
+
+            //Department D1 = new Department { Name = "ÏÎÂÒèÀÑ", Faculty = F1, FacultyId = F1.Id };
+            //Department D2 = new Department { Name = "ÊÈÑ", Faculty = F1, FacultyId = F1.Id };
+            //Department D3 = new Department { Name = "ÈÑèÒ", Faculty = F1, FacultyId = F1.Id };
+
+            //db.Departments.AddRange(new List<Department> { D1, D2, D3 });
+            //db.SaveChanges();
+
+            //Group G1 = new Group { Name = "ÂÏĞ11", Department = D1, DepartmentId = D1.Id };
+            //Group G2 = new Group { Name = "ÂÏĞ21", Department = D1, DepartmentId = D1.Id };
+            //Group G3 = new Group { Name = "ÂÏĞ31", Department = D1, DepartmentId = D1.Id };
+            //Group G4 = new Group { Name = "ÂÊÁ11", Department = D2, DepartmentId = D2.Id };
+            //Group G5 = new Group { Name = "ÂÊÁ21", Department = D2, DepartmentId = D2.Id };
+            //Group G6 = new Group { Name = "ÂÊÁ31", Department = D2, DepartmentId = D2.Id };
+            //Group G7 = new Group { Name = "ÂÏÈ11", Department = D3, DepartmentId = D3.Id };
+            //Group G8 = new Group { Name = "ÂÏÈ21", Department = D3, DepartmentId = D3.Id };
+            //Group G9 = new Group { Name = "ÂÏÈ31", Department = D3, DepartmentId = D3.Id };
+
+            //db.Groups.AddRange(new List<Group> { G1, G2, G3, G4, G5, G6, G7, G8, G9 });
+            //db.SaveChanges();
+
+            ////âòîğîé ôàêóëüòåò
+            //Faculty F2 = new Faculty { Name = "ÀÌèÓ" };
+            //db.Faculties.Add(F2);
+            //db.SaveChanges();
+
+            //Department D11 = new Department { Name = "ÀÏÏ", Faculty = F2, FacultyId=F2.Id };
+            //Department D21 = new Department { Name = "ÀÏÌ", Faculty = F2, FacultyId = F2.Id };
+            //Department D31 = new Department { Name = "ÌèĞ", Faculty = F2, FacultyId = F2.Id };
+
+            //db.Departments.AddRange(new List<Department> { D11, D21, D31 });
+            //db.SaveChanges();
+
+            //Group G11 = new Group { Name = "ÀÌÀ11", Department = D11, DepartmentId=D11.Id };
+            //Group G21 = new Group { Name = "ÀÌÀ21", Department = D11, DepartmentId = D11.Id };
+            //Group G31 = new Group { Name = "ÀÌÀ31", Department = D11, DepartmentId = D11.Id };
+            //Group G41 = new Group { Name = "ÀÏÀ11", Department = D21, DepartmentId = D21.Id };
+            //Group G51 = new Group { Name = "ÀÏÀ21", Department = D21, DepartmentId = D21.Id };
+            //Group G61 = new Group { Name = "ÀÏÀ31", Department = D21, DepartmentId = D21.Id };
+            //Group G71 = new Group { Name = "ÀÌÌ11", Department = D31, DepartmentId = D31.Id };
+            //Group G81 = new Group { Name = "ÀÌÌ21", Department = D31, DepartmentId = D31.Id };
+            //Group G91 = new Group { Name = "ÀÌÌ31", Department = D31, DepartmentId = D31.Id };
+
+            //db.Groups.AddRange(new List<Group> { G11, G21, G31, G41, G51, G61, G71, G81, G91 });
+            //db.SaveChanges();
+
+            ////òğåòèé ôàêóëüòåò
+            //Faculty F3 = new Faculty { Name = "ÈÁèÌ" };
+            //db.Faculties.Add(F3);
+            //db.SaveChanges();
+
+            //Department D12 = new Department { Name = "ÈÁÌ", Faculty = F3, FacultyId=F3.Id };
+            //Department D22 = new Department { Name = "İÈ", Faculty = F3, FacultyId = F3.Id };
+            //Department D32 = new Department { Name = "Ìèİ", Faculty = F3, FacultyId = F3.Id };
+
+            //db.Departments.AddRange(new List<Department> { D12, D22, D32 });
+            //db.SaveChanges();
+
+            //Group G12 = new Group { Name = "ÈÌ11", Department = D12, DepartmentId= D12.Id };
+            //Group G22 = new Group { Name = "ÈÌ21", Department = D12, DepartmentId = D12.Id };
+            //Group G32 = new Group { Name = "ÈÌ31", Department = D12, DepartmentId = D12.Id };
+            //Group G42 = new Group { Name = "ÈÌÁ11", Department = D22, DepartmentId = D22.Id };
+            //Group G52 = new Group { Name = "ÈÌÁ21", Department = D22, DepartmentId = D22.Id };
+            //Group G62 = new Group { Name = "ÈÌÁ31", Department = D22, DepartmentId = D22.Id };
+            //Group G72 = new Group { Name = "ÈÁÌ11", Department = D32, DepartmentId = D32.Id };
+            //Group G82 = new Group { Name = "ÈÁÌ21", Department = D32, DepartmentId = D32.Id };
+            //Group G92 = new Group { Name = "ÈÁÌ31", Department = D32, DepartmentId = D32.Id };
+
+            //db.Groups.AddRange(new List<Group> { G12, G22, G32, G42, G52, G62, G72, G82, G92 });
+            //db.SaveChanges();
+
+            return "Äîáàâëåíî";
+        }
