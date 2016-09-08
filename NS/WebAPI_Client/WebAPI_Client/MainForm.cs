@@ -220,11 +220,5 @@ namespace WebAPI_Client
                 RegBTN.Enabled = true;
             }
         }
-
-        public string get()
-        {
-            return "asdasd";
-        }
-
     }
 }
