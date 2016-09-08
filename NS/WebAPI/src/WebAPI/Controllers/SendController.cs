@@ -248,5 +248,10 @@ namespace WebAPI.Controllers
             }
         }
 
+        public string get()
+        {
+            return "qwerwqwqr";
+        }
+
     }
 }
