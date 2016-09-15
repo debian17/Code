@@ -1,9 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace WebAPI.Controllers
 {
+
     public class GetDataController : Controller
     {
         DSTUContext db;
@@ -13,12 +16,12 @@ namespace WebAPI.Controllers
         }
 
         public JsonResult GetFaculties()
-        {
+        {                  
             var f = db.Faculties.ToArray();
-            string[] s = new  string[f.Length];
+            string[] s = new string[f.Length];
 
             int l = s.Length;
-            for(int i = 0; i < l; i++)
+            for (int i = 0; i < l; i++)
             {
                 s[i] = f[i].Name;
             }
@@ -76,6 +79,6 @@ namespace WebAPI.Controllers
             string f = t[0].Department.Faculty.Name;
             return new JsonResult(f);
         }
-       
+              
     }
 }

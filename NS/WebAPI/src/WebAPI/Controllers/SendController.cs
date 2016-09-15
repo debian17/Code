@@ -222,7 +222,7 @@ namespace WebAPI.Controllers
                     var im = db.Messages.FirstOrDefault(p => p.Id == Id_arr[i]);
                     im.IsSended = true;
                 }
-                db.SaveChanges();
+                db.SaveChangesAsync();
                 return 1;
             }
             return -1;
@@ -246,6 +246,11 @@ namespace WebAPI.Controllers
             {
                 return -1;
             }
+        }
+
+        public string Get()
+        {
+            return JsonConvert.SerializeObject(db.Teachers.ToArray());
         }
 
     }

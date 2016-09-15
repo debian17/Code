@@ -3,6 +3,7 @@ using System.Reflection;
 
 namespace Laba1
 {
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class DebugPrintAttribute: Attribute
     {
         public string Format { get; set; }
@@ -13,14 +14,41 @@ namespace Laba1
         }
     }
     
-    [DebugPrint]
+    
     public static class RefLab
     {
         public static void DebugPrint(object obj)
         {
-            
+            Type t = obj.GetType();
+            object[] attrs = t.GetCustomAttributes(t.GetType());
+            var f = t.GetFields();
+
+            foreach( var i in t.GetFields())
+            {
+                Console.WriteLine(i.Name);
+            }
+
+            foreach (var i in t.GetProperties())
+            {
+                Console.WriteLine(i.Name);
+            }
 
         }
+    }
+    
+    
+    public class TestClass
+    {       
+
+        [DebugPrint]
+        public int a;
+        [DebugPrint]
+        public int b;
+
+        [DebugPrint]
+        public string c { get; set; }
+        [DebugPrint]
+        public string d { get; set; }
     }
 
 
@@ -28,12 +56,9 @@ namespace Laba1
     {
         public static void Main(string[] args)
         {
-            Type t = typeof(RefLab);
-            object[] attrs = t.
-            foreach (DebugPrintAttribute a in attrs)
-            {
-                Console.WriteLine(a.Format);
-            }
+            TestClass a = new TestClass();
+
+            RefLab.DebugPrint(a);
 
         }
     }
