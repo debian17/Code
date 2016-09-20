@@ -248,10 +248,5 @@ namespace WebAPI.Controllers
             }
         }
 
-        public string Get()
-        {
-            return JsonConvert.SerializeObject(db.Teachers.ToArray());
-        }
-
     }
 }

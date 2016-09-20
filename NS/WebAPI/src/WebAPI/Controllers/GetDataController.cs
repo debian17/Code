@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         }
 
         public JsonResult GetFaculties()
-        {                  
+        {
             var f = db.Faculties.ToArray();
             string[] s = new string[f.Length];
 
@@ -25,6 +25,7 @@ namespace WebAPI.Controllers
             {
                 s[i] = f[i].Name;
             }
+
             return new JsonResult(s);
         }
         public JsonResult GetDepartments()
