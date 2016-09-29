@@ -167,11 +167,11 @@ namespace WebAPI.Controllers
                 {
                     for (int i = 0; i < l; i++)
                     {
-                        await Server.GetResponseAsync("https://smsc.ru/sys/send.php?login=" + service.Login + "&" +
-                        "psw=" + service.Password + "&" +
-                        "phones=" + S[i].PhoneNumber + "&" +
-                        "mes=" + message + "&" +
-                        "charset=utf-8");
+                        //await Server.GetResponseAsync("https://smsc.ru/sys/send.php?login=" + service.Login + "&" +
+                        //"psw=" + service.Password + "&" +
+                        //"phones=" + S[i].PhoneNumber + "&" +
+                        //"mes=" + message + "&" +
+                        //"charset=utf-8");
                     }
                 }
                 catch (System.Net.WebException)
@@ -222,7 +222,7 @@ namespace WebAPI.Controllers
                     var im = db.Messages.FirstOrDefault(p => p.Id == Id_arr[i]);
                     im.IsSended = true;
                 }
-                db.SaveChangesAsync();
+                db.SaveChanges();
                 return 1;
             }
             return -1;

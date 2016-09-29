@@ -1,15 +1,13 @@
 
 var
-  a: array of double;
-  b: array of double;
-  x: array of double;
-  y: array of double;
-  k, n: integer;
-  sum: array[,] of double;
-  filename: string;
-  f: text;
-  flag: boolean;
-  t: integer;
+  a: array of double; //искомые коэффициенты
+  b: array of double; //столбец свободных членов
+  x: array of double; //массив кординат x
+  y: array of double; //массив значений y по x
+  k, n: integer; // k-количество точек апп. n - степень полинома
+  sum: array[,] of double; //суммы степеней x,y при неизвестных коэффициентах полинома
+  flag: boolean; //флаг исключений
+  t: integer; //счетчик 
 
 procedure RMATRIX();
 begin
@@ -20,18 +18,16 @@ begin
       for var l := 0 to k - 1 do
         sum[i, j] += Power(x[l], i + j);
     end;
-  
   for var i := 0 to n do
     for var j := 0 to k - 1 do
       b[i] += Power(x[j], i) * y[j];
 end;
 
-procedure diagonal();
+procedure DIAGONAL();
 begin
   var
   temp: double;
-  temp := 0;
-  
+  temp := 0;  
   for var i := 0 to n do
     if(sum[i, i] = 0) then
       for var j := 0 to n do
@@ -53,7 +49,7 @@ begin
       end;
 end;
 
-procedure processrows();
+procedure ROWSPROCESS();
 var
   m: double;
   s: double;
@@ -70,17 +66,7 @@ begin
       for var j := l to n do
         sum[i, j] -= m * sum[l, j];
       b[i] -= M * b[l];
-    end;
-  
-  {for var i:=n-1 downto 0 do
-    begin
-    s:=0;
-    for var j:=i to n do
-      s:=s+sum[i,j]*a[j];
-    a[i]:=(b[i]-s)/sum[i,i];
-    end;
-  end;}
-  
+    end;  
   t := n;
   while(t >= 0) do
   begin
@@ -92,22 +78,21 @@ begin
   end;
 end;
 
-procedure printmatrix();
+procedure PRINTRESULT();
 begin
-  
+writeln();
+writeln('–езультат:');  
   for var i := 0 to n do
-    writeln(a[i]);
-  
+    writeln('a',i,'=',a[i]);
+
+writeln();
 end;
-
-
 
 begin
   flag := true;
   while(flag) do
   begin
     try
-      //clrscr();
       writeln('¬ведите количество точек аппроксимации:');
       readln(k);
       
@@ -133,7 +118,6 @@ begin
   while(flag) do
   begin
     try
-      //clrscr();
       writeln('¬ведите степень многочлена:');
       readln(n);
       
@@ -163,35 +147,19 @@ begin
   
   for var i := 0 to k - 1 do
   begin;
-    //clrscr();
     writeln('¬ведите x', i);
     readln(x[i]);
     writeln('¬ведите значение y(x', i, ')');
     readln(y[i]);
   end;
   
-  
-  
-  {for var i := 0 to n do
-    for var j := 0 to n do
-      sum[i, j] := 0;
-  
-  for var i := 0 to n do
-  begin
-    writeln();
-    for var j := 0 to n do
-      write(sum[i, j]);
-  end;}
   RMATRIX();
   
-  diagonal();
+  DIAGONAL();
   
-  processrows();
+  ROWSPROCESS();
   
-  printmatrix();
+  PRINTRESULT();
   
   writeln('ƒл€ выхода нажмите Enter...');
-  //readln();
 end.
-
-////////////////////////
