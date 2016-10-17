@@ -20,8 +20,8 @@ namespace Laba1
         public static void DebugPrint(object obj)
         {
             Type t = obj.GetType();
-            object[] attrs = t.GetCustomAttributes(t.GetType());
             var f = t.GetFields();
+            var g = 
 
             foreach( var i in t.GetFields())
             {
@@ -39,7 +39,6 @@ namespace Laba1
     
     public class TestClass
     {       
-
         [DebugPrint]
         public int a;
         [DebugPrint]

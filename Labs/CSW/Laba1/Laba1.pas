@@ -1,4 +1,3 @@
-
 var
   a: array of double; //искомые коэффициенты
   b: array of double; //столбец свободных членов
@@ -100,7 +99,6 @@ begin
       else
       begin
         writeln('Число должно быть <=20.');
-        writeln('Для продолжения нажмите Enter...');
         readln();
       end;
     
@@ -108,7 +106,6 @@ begin
       on System.FormatException do
       begin
         writeln('Введите число!');
-        writeln('Для продолжения нажмите Enter...');
         readln();
       end;
     end;
@@ -125,7 +122,6 @@ begin
       else
       begin
         writeln('Число должно быть <=3.');
-        writeln('Для продолжения нажмите Enter...');
         readln();
       end;
     
@@ -133,7 +129,6 @@ begin
       on System.FormatException do
       begin
         writeln('Введите число!');
-        writeln('Для продолжения нажмите Enter...');
         readln();
       end;
     end;
@@ -162,4 +157,5 @@ begin
   PRINTRESULT();
   
   writeln('Для выхода нажмите Enter...');
+  readln();
 end.
