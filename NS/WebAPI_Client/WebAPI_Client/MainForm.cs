@@ -220,5 +220,7 @@ namespace WebAPI_Client
                 RegBTN.Enabled = true;
             }
         }
+
+
     }
 }
