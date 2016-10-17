@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:color="#ffff0000"/> <!-- кнопка нажата -->
+    <item android:state_focused="true"
+        android:color="#ff0000ff"/> <!-- кнопка получила фокус -->
+    <item android:color="#ff000000"/> <!-- цвет кнопки по умолчанию -->
+    <item>
+        <bitmap android:src="@drawable/button"
+            android:gravity="center"/>
+    </item>
+</selector>
