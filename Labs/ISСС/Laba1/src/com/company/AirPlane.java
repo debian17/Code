@@ -1,18 +1,13 @@
 package com.company;
 
 
-public abstract class AirPlane implements IAerobatics, IAutoPilot {
+public abstract class AirPlane  {
 
     public void Display(){}
     public void Fly(){}
 
-    @Override
-    public void AutoPilotOn() throws Exception {}
+    public IAutoPilot AutoPilot;
 
-    @Override
-    public  void AutoPilotOff() throws Exception {}
-
-    @Override
-    public void Aerobatics(){}
+    public IAerobatics Aerobatics;
 
 }
