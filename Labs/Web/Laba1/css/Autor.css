@@ -1,0 +1,36 @@
+#Me{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #444;
+    margin-left: 3%;
+    margin-top:3%;
+}
+
+.MainContent{
+    height: 700px;
+}
+
+.Footer{
+    margin-top:5%;
+}
+
+.MainContent p{
+    margin-top:3%;
+    font-size: 20pt;
+    margin-left: 22%;
+    color:darkblue;
+    text-align: center;
+    font-weight: 850;
+    line-height: 45px;
+}
+
+#GoodLuck{
+    height: 300px;
+    width: 500px;
+    margin-left: 25%;    
+}
+
+#GLT{
+    margin-right: 25%;
+}

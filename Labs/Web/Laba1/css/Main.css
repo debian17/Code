@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    background-image: url(/img/fresh_snow.png);
+    margin-right: 17px;
+}
+
+.HeadDiv{
+    width: 100%; 
+    height: 15%;
+    margin-bottom: 0px;
+    background-image: url(/img/fresh_snow.png);
+}
+
+.BackDiv{
+    width: 100%;
+    height: 80%;
+}
+
+.Footer{
+    width: 1900px;
+    height: 5%;
+    color: white;
+    font-size: 20pt;
+    font-weight: 700;
+    background-image: url(/img/hoffman.png);
+    margin-top:20%;
+}
+
+.Menu{
+    width: 20%;
+    height: 60%;
+    background-color:#EDEEF0;
+    background-color:#F8FBFF;
+    border-radius: 30px;
+    font-size: 20pt;
+    margin-left: 10%;
+    float: left;
+    margin-top: 9%;
+    box-shadow: 0 0 10px #444;
+}
+
+.Menu a{
+    display: block;
+    width: 75%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    margin-left: 13%;
+    border-bottom: 1px solid #115B97;
+    color: #115B97;
+}
+
+.MainContent{
+    width: 55%;
+    height: 90%;
+    background-color: #F5F8FC;
+    float: right;
+    border-radius: 30px;
+    margin-right: 10%;
+    margin-top: 3%;
+    box-shadow: 0 0 10px #444;
+
+}
+
+.MainContent img{
+    display: block;
+    margin: 10 auto;
+    box-shadow: 0 0 10px #444;
+    border-radius: 20px;
+}
+
+.HeadDiv img{
+    height: 90%;
+    margin-top: 1%;
+}
+
+#Velik1{
+    float: right;
+    margin-right: 15%;
+    box-shadow: 0 0 10px #444;
+    border-radius: 10px;
+}
+
+#Velik2{
+    margin-left: 15%;
+    transform: scale(-1,1);
+    box-shadow: 0 0 10px #444;
+    border-radius: 10px;
+}
+
+.hit{
+    text-align: center;
+    color: #115B97;
+    margin-top: 10px;
+}
+
+.podImg{
+    color: red;
+    font-size: 14pt;
+    text-align: center;
+}
+
+#Logo{
+    margin-left: 155px;
+    box-shadow: 0 0 10px #444;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.MainText{
+    font-size:18pt;
+    text-align: center;
+    color:darkblue;
+    margin-top:20px;
+}

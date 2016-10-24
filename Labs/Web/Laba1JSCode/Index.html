@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Software Shop</title>
+        <script>
+            //alert((parseInt("5A")+6)*2);
+            function test(x,y){
+                alert(x+";"+y);
+            }
+            
+            var a= "<table border=1>";
+            for(var i=0;i<10;i++){
+                a+="<tr>";
+                for(var j=0;j<10;j++){
+                    if((i%2) == (j%2)){
+                    a+="<td bgcolor=black width=30 height=30 onclick=test("+i+","+j+")></td>";    
+                    }
+                    else{
+                        a+="<td bgcolor=white width=30 height=30 onclick=test("+i+","+j+")></td>";   
+                    }                  
+                }
+                a+="</tr>";
+            }
+            document.write(a+"</table>");
+        </script>
+    </head>
+    
+    <body>
+        
+        <div></div>
+    
+        
+        
+    </body>
+</html>

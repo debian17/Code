@@ -1,0 +1,30 @@
+.MainContent{
+    height: 135%;
+    margin-bottom: 5%;
+}
+.MainContent img{
+    width: 30%;
+    height: 90%;
+    border-radius: 20px;
+    margin-left:1%;
+    float: left;
+    margin-top:15px;
+}
+
+.UserContent{
+    width: 90%;
+    height: 30%;
+    background-color: #C1D9F4;
+    border-radius: 20px;
+    margin-top: 25px;
+    margin-left: 5%;
+    box-shadow: 0 0 10px #444;
+}
+
+.UserContent p{
+    margin-left: 300px;
+    margin-top: 20px;
+    font-size: 16pt;
+    color:black;
+    font-weight: 700;
+}

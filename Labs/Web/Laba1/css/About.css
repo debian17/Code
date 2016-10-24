@@ -1,0 +1,41 @@
+#Logotip{
+    margin-top: 10px;
+    width: 70%;
+    height: 500px;
+    margin-left: 15%;
+    margin-bottom: 20px;
+}
+
+#Map{
+    width: 70%;
+    height: 500px;
+    margin-left: 15%;
+}
+
+.MainContent p{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18pt;
+    color: blue;
+    font-weight: 600;
+    float: left;
+}
+
+.MainContent{
+    height: 1400px;
+}
+
+h1{
+    margin-top:20px;
+    text-align: center;
+    color: darkblue;
+}
+
+.Footer{
+    margin-top: 40%;
+}
+
+#Phone{
+    margin-left: 25%;
+    margin-top:25px;
+}

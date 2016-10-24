@@ -1,36 +1,42 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>Software Shop</title>
-        <script>
-            //alert((parseInt("5A")+6)*2);
-            function test(x,y){
-                alert(x+";"+y);
-            }
-            
-            var a= "<table border=1>";
-            for(var i=0;i<10;i++){
-                a+="<tr>";
-                for(var j=0;j<10;j++){
-                    if((i%2) == (j%2)){
-                    a+="<td bgcolor=black width=30 height=30 onclick=test("+i+","+j+")></td>";    
-                    }
-                    else{
-                        a+="<td bgcolor=white width=30 height=30 onclick=test("+i+","+j+")></td>";   
-                    }                  
-                }
-                a+="</tr>";
-            }
-            document.write(a+"</table>");
-        </script>
-    </head>
-    
+        <link rel="stylesheet" href="css/Main.css">
+    </head>    
     <body>
         
-        <div></div>
+    <div class="HeadDiv">
+        <img src="img/velosiped.jpg" id="Velik1">
+        <img src="img/velosiped.jpg" id="Velik2">
+        <img src="img/software-masters-inc-logo.png" id="Logo">
     
+    </div>
         
+    <div class="BackDiv">
+        <div class="Menu">
+            <a href="Index.html">Главная<br></a>
+            <a href="OS.html">Операционные системы<br></a>
+            <a href="AntiVirus.html">Антивирусы<br></a>
+            <a href="Graphics.html">Графика<br></a>
+            <a href="About.html">О компании<br></a>
+            <a href="Autor.html">Об авторе</a>        
+        </div>
+        
+        <div class="MainContent">
+            <h1 class="hit">СПЕЦИАЛЬНАЯ ЦЕНА!</h1>
+            <img src="img/windows.jpg">
+            <p class="podImg">Успейте приобрести Windows 8 Pro по специальной цене.<br> Акция действует до 30.02.2017г.</p>
+            <p class="MainText">Вас приветствует магазин <s>велосипедов</s> программного обеспечения<br> "Превозмогая трудности"!<br>
+            Наш магазин сотрудничает с известными компаниями производителями, поэтому у нас Вы найдете только <s>взломанное</s> лицензионное программное обеспечение по уникальным ценам.<br><br>
+            Специалисты технической поддержки с радостью окажут помощь в любое время.<br> Вам лишь нужно подождать не менее десяти минут, пока Вам ответят.<br>
+            Служба поддержки: 8-800-555-35-35.</p>
+        </div>
+    </div>
+    
+        <div class="Footer"><p style="color:blue">Copyright
+         <a href="mailto:forletters01@gmail.com">cracksoftware@mail.ru</a></p>
+        </div>
         
     </body>
 </html>

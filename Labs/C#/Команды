@@ -1,0 +1,6 @@
+mkdir nettest(путь к папке, которую создаем)
+cd nettest(переходим в нее)
+dotnet new
+dotnet restore
+dotnet run
+
