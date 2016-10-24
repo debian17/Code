@@ -13,7 +13,7 @@ public class Komissar implements IObserver {
     }
 
     @Override
-    public void Upadate(Object obj) {
+    public void Update(Object obj) {
         boolean CallOfDuty = (boolean)obj;
         if(CallOfDuty){
             System.out.println("Коммисар "+Name+": да начнется охота за призывниками!");

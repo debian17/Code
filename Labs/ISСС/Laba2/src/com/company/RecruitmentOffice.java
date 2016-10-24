@@ -37,7 +37,7 @@ public class RecruitmentOffice implements IObservable {
             System.out.println("Военкомат: призыв окончен!");
         }
         for(IObserver o : observers){
-            o.Upadate(CallOfDuty);
+            o.Update(CallOfDuty);
         }
     }
 }

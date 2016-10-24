@@ -20,7 +20,9 @@ public class Main {
 
         voenkomat.Change_State();
 
+        voenkomat.RemoveObserver(d);
 
+        voenkomat.Change_State();
 
     }
 }

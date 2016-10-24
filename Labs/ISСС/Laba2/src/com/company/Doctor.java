@@ -13,7 +13,7 @@ public class Doctor implements IObserver {
     }
 
     @Override
-    public void Upadate(Object obj) {
+    public void Update(Object obj) {
         boolean CallOfDuty = (boolean)obj;
         if(CallOfDuty){
             System.out.println("Доктор "+Name+": время лечить призывиков!");

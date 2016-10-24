@@ -11,12 +11,12 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class HelloWorld {
+public class Main {
     float PI = 3.1459265f;
 
-    int WIDTH = 640;
-    int HEIGHT = 640;
-    static Circle[] c = new Circle[3];
+    int WIDTH = 1100;
+    int HEIGHT = 600;
+    static Circle[] c = new Circle[4];
     int refreshMillis = 20;
 
     //clipping area
@@ -26,7 +26,6 @@ public class HelloWorld {
     private long window;
 
     public void run() throws InterruptedException {
-        System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
         try {
             init();
@@ -57,7 +56,7 @@ public class HelloWorld {
 
 
         // Create the window
-        window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(WIDTH, HEIGHT, "Laba#1", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -111,15 +110,7 @@ public class HelloWorld {
 
                 glTranslatef(ballX, ballY, 0.0f);
                 glBegin(GL_TRIANGLE_FAN);
-                glColor3f(0.0f, 0.5f, 0.0f);
-                switch (i) {
-                    case 0: glColor3f(0.0f, 1.0f, 0.0f);
-                            break;
-                    case 1: glColor3f(1.0f, 0.0f, 0.0f);
-                            break;
-                    case 2: glColor3f(0.0f, 0.0f, 1.0f);
-                            break;
-                }
+                glColor3f(0.0f, 1.0f, 0.0f);
                 glVertex2f(0.0f, 0.0f);
                 int numSegments = 100;
                 float angle;
@@ -163,14 +154,11 @@ public class HelloWorld {
                 c[i].setBallY(ballY);
                 c[i].setxSpeed(xSpeed);
                 c[i].setySpeed(ySpeed);
-
-
-
             }
             glfwSwapBuffers(window);
         }
-
     }
+
 void reshape(int width, int height) throws InterruptedException {
     if (height == 0) height = 1;
     float aspect = (float) width/height;
@@ -192,7 +180,9 @@ void reshape(int width, int height) throws InterruptedException {
         clipAreaYBottom = -1.0 / aspect;
         clipAreaYTop = 1.0 / aspect;
     }
+
     glOrtho(clipAreaXLeft, clipAreaXRight, clipAreaYBottom, clipAreaYTop, -1.0, 1.0);
+
     for (int i = 0; i < c.length; i++) {
         float ballRadius = c[i].getBallRadius();
         c[i].setBallXMin((float) clipAreaXLeft + ballRadius);
@@ -200,14 +190,16 @@ void reshape(int width, int height) throws InterruptedException {
         c[i].setBallYMin((float) clipAreaYBottom + ballRadius);
         c[i].setBallYMax((float) clipAreaYTop - ballRadius);
     }
+
     Thread.sleep(refreshMillis);
 }
     public static void main(String[] args) throws InterruptedException {
 
-        c[0] = new Circle(0.3f, -0.2f, -0.2f, 0.02f, 0.007f);
-        c[1] = new Circle(0.2f, 0.5f, 0.5f, -0.01f, 0.01f);
-        c[2] = new Circle(0.2f, -0.2f, 0.4f, 0.03f, -0.007f);
-        new HelloWorld().run();
+        c[0] = new Circle(0.1f, -0.2f, -0.2f, 0.02f, 0.007f);
+        c[1] = new Circle(0.1f, 0.5f, 0.5f, -0.01f, 0.01f);
+        c[2] = new Circle(0.1f, -0.2f, 0.4f, 0.03f, -0.007f);
+        c[3] = new Circle(0.1f, -0.7f, 0.5f, 0.02f, -0.007f);
+        new Main().run();
     }
 
 }

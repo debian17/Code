@@ -5,7 +5,6 @@ import java.util.Random;
 public class Student implements IObserver {
 
     public String Name;
-    private boolean inArm;
     IObservable RecruitmentOffice;
 
     public Student(String Name, IObservable RO){
@@ -15,7 +14,7 @@ public class Student implements IObserver {
     }
 
     @Override
-    public void Upadate(Object obj) throws InterruptedException {
+    public void Update(Object obj) throws InterruptedException {
 
         boolean CallOfDuty = (boolean)obj;
         if(CallOfDuty){
