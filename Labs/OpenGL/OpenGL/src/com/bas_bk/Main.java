@@ -16,10 +16,9 @@ public class Main {
 
     int WIDTH = 1100;
     int HEIGHT = 600;
-    static Circle[] c = new Circle[4];
+    static Circle[] c = new Circle[100];
     int refreshMillis = 20;
 
-    //clipping area
     double clipAreaXLeft, clipAreaXRight, clipAreaYBottom, clipAreaYTop;
 
     // The window handle
@@ -194,12 +193,46 @@ void reshape(int width, int height) throws InterruptedException {
     Thread.sleep(refreshMillis);
 }
     public static void main(String[] args) throws InterruptedException {
+        float j=0.1f;
 
-        c[0] = new Circle(0.1f, -0.2f, -0.2f, 0.02f, 0.007f);
-        c[1] = new Circle(0.1f, 0.5f, 0.5f, -0.01f, 0.01f);
-        c[2] = new Circle(0.1f, -0.2f, 0.4f, 0.03f, -0.007f);
-        c[3] = new Circle(0.1f, -0.7f, 0.5f, 0.02f, -0.007f);
+        for(int i=0;i<25;i++){
+            c[i] = new Circle(0.01f, 1f+j, 1f-j, 0.02f, 0.007f);
+            j+=0.02f;
+        }
+        j=0.2f;
+
+        for(int i=25;i<50;i++){
+            c[i] = new Circle(0.02f, -1f+j, 1f-j, 0.02f, 0.007f);
+            j+=0.02f;
+        }
+        j=0.3f;
+
+        for(int i=50;i<75;i++){
+            c[i] = new Circle(0.01f, 1f-j, -1f+j, 0.02f, 0.007f);
+            j+=0.02f;
+        }
+        j=0.4f;
+
+        for(int i=75;i<100;i++){
+            c[i] = new Circle(0.015f, -1f+j, -1f+j, 0.02f, 0.007f);
+            j+=0.02f;
+        }
+
+
+        /*for(int i=0; i<100;i++){
+            if(i%2==0){
+                c[i] = new Circle(0.05f, -1f+j, 1f+j, 0.02f, 0.007f);
+            }
+            else if(i%3==1){
+                c[i] = new Circle(0.05f, 1f+j, -1f+j, 0.02f, 0.007f);
+            }
+            else{
+                c[i] = new Circle(0.05f, -1f+j, 1f+j, 0.02f, 0.007f);
+            }
+            j+=0.2f;
+        }*/
+
+
         new Main().run();
     }
-
 }
