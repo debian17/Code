@@ -1,0 +1,27 @@
+Initialize engine version: 5.4.2f2 (b7e030c65c9b)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 740M (ID=0xfdf)
+    Vendor:   NVIDIA
+    VRAM:     2019 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\GitHub\Unity\Laba2\1_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.050 seconds
+Platform assembly: C:\GitHub\Unity\Laba2\1_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\GitHub\Unity\Laba2\1_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 3200x1080 at -1280,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.802049 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 27c4 -> priority: 1 
+  Thread -> id: 26a8 -> priority: 1 
