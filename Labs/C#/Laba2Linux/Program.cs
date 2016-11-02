@@ -27,20 +27,22 @@ namespace Laba1
 
             var fields = t.GetFields().Where(
                    field => field.IsDefined(typeof(DebugPrintAttribute)));
-
+            
+            Console.WriteLine();
             Console.WriteLine("Fields:");
             foreach (FieldInfo info in fields)
             {
-                DebugPrintAttribute myAttr = (DebugPrintAttribute)info.GetCustomAttributes(typeof(DebugPrintAttribute)).ElementAt(0);
+                DebugPrintAttribute myAttr = (DebugPrintAttribute)info.GetCustomAttributes(typeof(DebugPrintAttribute)).First();
                 Console.WriteLine(myAttr.Format, info.GetValue(obj), info.Name, t.Name);
             }
-
+            Console.WriteLine();
             Console.WriteLine("Properties:");
             foreach (PropertyInfo info in props)
             {
-                DebugPrintAttribute myAttr = (DebugPrintAttribute)info.GetCustomAttributes(typeof(DebugPrintAttribute)).ElementAt(0);
+                DebugPrintAttribute myAttr = (DebugPrintAttribute)info.GetCustomAttributes(typeof(DebugPrintAttribute)).First();
                 Console.WriteLine(myAttr.Format, info.GetValue(obj), info.Name, t.Name);
             }
+            Console.WriteLine();
         }
     }
     
@@ -70,8 +72,6 @@ namespace Laba1
         public static void Main(string[] args)
         {
             TestClass a = new TestClass(123,456,"some property","not print property");
-
-
             RefLab.DebugPrint(a);
         }
     }
