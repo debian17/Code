@@ -39,6 +39,8 @@ namespace Laba9
                         good++;
                     }
                 }
+            Console.WriteLine();
+
 
             double res =(4 * good) / NumberOfPoint;
             Monitor.Enter(locker);

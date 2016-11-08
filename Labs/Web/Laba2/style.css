@@ -1,0 +1,63 @@
+@-webkit-keyframes animBird {
+    from { background-position: 0px 0px; }
+    to { background-position: 0px -96px; }
+}
+
+@-webkit-keyframes animLand {
+    0% { background-position: 0px 0px; }
+    100% { background-position: -335px 0px; }
+}
+
+@-webkit-keyframes animCeiling {
+    0% { background-position: 0px 0px; }
+    100% { background-position: -63px 0px; }
+}
+
+#bird
+{
+    position: absolute;
+    width: 34px;
+    height: 24px;
+    left: 100px;
+    top:700px;
+    background-image: url("assets/bird.png");
+    animation: animBird 300ms steps(4) infinite;
+    z-index: 2;
+}
+
+#Sky{
+    width: 1600px;
+    height: 750px;
+    background-image: url("assets/sky1.png");
+    background-size:contain;
+}
+
+#Ceiling{
+    position: absolute;
+    top: 300px;
+    width: 1600px;
+    height: 20px;
+    background-image: url("assets/ceiling.png");
+    background-size:contain;
+    -webkit-animation: animCeiling 481ms linear infinite;
+    animation: animCeiling 481ms linear infinite;
+}
+
+#City{
+    width : 1600px;
+    height: 100px;
+    position: absolute;
+    top:750px;
+    background-image: url("assets/sky.png");
+    background-size: contain;
+}
+
+#Land{
+    width : 1600px;
+    height: 100px;
+    position: absolute;
+    top: 850px;
+    background-image: url("assets/land.png");
+    -webkit-animation: animLand 2516ms linear infinite;
+    animation: animLand 2516ms linear infinite;
+}

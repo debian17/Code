@@ -17,6 +17,7 @@ public class Main {
         System.out.println("Введите строку для записи:");
         Scanner s = new Scanner(System.in);
 
+
         /*try(FileWriter fw = new FileWriter(FileName)){
             for(int i=-10;i<10;i++){
                 String buf = Integer.toString(i);

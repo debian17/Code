@@ -9,13 +9,12 @@ namespace Laba1
     public class DebugPrintAttribute: Attribute
     {
         public string Format { get; set; }
-
         public DebugPrintAttribute(string Format="{0}")
         {
             this.Format = Format;
         }
     }
-       
+    
     public static class RefLab
     {
         public static void DebugPrint(object obj)
