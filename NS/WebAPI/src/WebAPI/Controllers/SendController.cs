@@ -167,11 +167,11 @@ namespace WebAPI.Controllers
                 {
                     for (int i = 0; i < l; i++)
                     {
-                        //await Server.GetResponseAsync("https://smsc.ru/sys/send.php?login=" + service.Login + "&" +
-                        //"psw=" + service.Password + "&" +
-                        //"phones=" + S[i].PhoneNumber + "&" +
-                        //"mes=" + message + "&" +
-                        //"charset=utf-8");
+                        await Server.GetResponseAsync("https://smsc.ru/sys/send.php?login=" + service.Login + "&" +
+                        "psw=" + service.Password + "&" +
+                        "phones=" + S[i].PhoneNumber + "&" +
+                        "mes=" + message + "&" +
+                        "charset=utf-8");
                     }
                 }
                 catch (System.Net.WebException)
