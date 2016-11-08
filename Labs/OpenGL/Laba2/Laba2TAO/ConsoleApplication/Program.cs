@@ -1,43 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using Tao.FreeGlut;
+﻿using Tao.FreeGlut;
 using Tao.OpenGl;
-using Tao.Platform.Windows;
 
 namespace ConsoleApplication
 {
     internal class Program
     {
-        private static double eye_x, eye_y, eye_z, scale, aX, aY, aZ, angle, dScale;
+        private static double eye_x, eye_y, eye_z, scale, aX, aY, aZ, angle;
 
-        static void init_graphics()
+        static void Init_graphics()
             {
             Gl.glEnable(Gl.GL_LIGHTING);
             Gl.glEnable(Gl.GL_LIGHT0);
-            //float[] light_pos = new float[3] {1, 0.5F, 1};
-            float[] light_pos = new float[3] { 1, 1, 5};
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, light_pos);
+            float[] light= new float[3] {1, 0.5F, 1};
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, light);
             Gl.glEnable(Gl.GL_DEPTH_TEST);
             Gl.glClearColor(1, 1, 1, 1);
 
             eye_x = 3;
             eye_y = 10;
             eye_z = 0;
-            scale = 1;
-            dScale = 0.05;
+            scale = 0.1;
             angle = 2;
             }
 
-        static void on_display()
+        static void OnDisplay()
         {
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
             Gl.glLoadIdentity();
-            Glu.gluLookAt(eye_x, eye_y, eye_z, 0, 0, 0, 1, 0, 0);
+            Glu.gluLookAt(eye_x, eye_y, eye_z, 0, -10, 0, 1, 0, 0);
             Gl.glRotated(aX, 1, 0, 0);
             Gl.glRotated(aY, 0, 1, 0);
             Gl.glRotated(aZ, 0, 0, 1);
-            //Gl.glTranslated(0, 0, 0);
-            Gl.glScaled(scale, scale, scale);
+            Gl.glTranslated(1.5, 0, 0);
 
             //основание
             Gl.glTranslated(-1.5, 0, 0);
@@ -74,7 +68,6 @@ namespace ConsoleApplication
             Gl.glTranslated(-0.2, -0.25, 0.15);
             Glut.glutSolidSphere(0.05, 50, 50);
 
-
             //левый глаз
             Gl.glTranslated(0.4, 0, 0);
             Glut.glutSolidSphere(0.05, 50, 50);
@@ -87,7 +80,7 @@ namespace ConsoleApplication
             Glut.glutSwapBuffers();
         }
 
-        static void on_reshape(int w, int h)
+        static void OnReshape(int w, int h)
             {
                 Gl.glMatrixMode(Gl.GL_PROJECTION);
                 Gl.glLoadIdentity();
@@ -98,12 +91,12 @@ namespace ConsoleApplication
 
         static void UpdateKeys(byte key, int x, int y)
         {
-            if (key == 'q')
+            if (key == 'e')
             {
                 aY -= angle;
             }
 
-            if (key == 'e')
+            if (key == 'q')
             {
                 aY +=angle;
             }
@@ -130,19 +123,19 @@ namespace ConsoleApplication
 
             if (key == 'n')
             {
-                scale-=dScale;
+                eye_y += scale;
             }
 
             if (key == 'j')
             {
-                scale+=dScale;
+                eye_y -= scale;
             }
 
         }
 
         static void Update(int val)
         {
-            on_display();
+            OnDisplay();
             Glut.glutTimerFunc(20, Update, 1);
         }
 
@@ -151,9 +144,9 @@ namespace ConsoleApplication
             Glut.glutInit();
             Glut.glutInitWindowSize(1000, 1000);
             Glut.glutCreateWindow("Snow_Man");
-            init_graphics();
-            Glut.glutDisplayFunc(on_display);
-            Glut.glutReshapeFunc(on_reshape);
+            Init_graphics();
+            Glut.glutDisplayFunc(OnDisplay);
+            Glut.glutReshapeFunc(OnReshape);
             Glut.glutTimerFunc(20, Update, 1);
             Glut.glutKeyboardFunc(UpdateKeys);
             Glut.glutMainLoop();

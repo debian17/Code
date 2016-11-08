@@ -5,51 +5,59 @@ using System.Threading.Tasks;
 
 namespace Laba2
 {
-    public class Place
+    class Place
     {
-        public bool[] cars;
-        public int[] income;
-        public int[] outcome;
+        bool[] car;
+        int[] InTime;
+        int[] OutTime;
 
         public Place()
         {
-            cars = new bool[3];
-            income = new int[3];
-            outcome = new int[3];
+            car = new bool[3];
+            InTime = new int[3];
+            OutTime = new int[3];
         }
     }
 
     public class Station
-    {    
-        private int m;
-        private Place[] M;
+    {
+        const int n = 0;
+        const int N = 10;
+        const int k = 0;
+        const int K = 20;
+        public int WorkTime{ get; }
 
-        public Station(int m)
+        private Place[] m;
+
+        public Station(int mCount, int WorkTime)
         {
-            this.m = m;
-            M = new Place[m];
+            m = new Place[mCount];
+            this.WorkTime = WorkTime;
         }
 
-        public void AddCar(int n, int N, int k, int K)
+        public void Check()
         {
-            Random r = new Random();
-            for(int )
 
         }
     }
 
     public class Program
     {
-        const int n = 0;
-        const int N = 10;
-        const int k = 0;
-        const int K = 20;
-
         public static void Main(string[] args)
         {
-            Console.Write("Vvedite kolichestvo mest: ");
-            int m = Convert.ToInt32(Console.ReadLine());
-            Station S = new Station(m);
+            Console.WriteLine("Vvedite kolichestvo mest: ");
+            int mCount = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Vvedite WorkTime:");
+            int wt = Convert.ToInt32(Console.ReadLine());
+
+            Station S = new Station(mCount,wt);
+            Random r = new Random();
+
+            for(int i = 0; i <S.WorkTime; i++)
+            {
+                
+
+            }
 
             
 
