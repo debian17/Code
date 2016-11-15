@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project FileVersion="2" Name="Laba2" MainFile="Laba2.pas" OutputFileName="Laba2.exe" OutputDirectory="" ProjectType="ConsoleApp" IncludeDebugInfo="True" GenerateXMLDoc="False" CommandLineArguments="" AppIcon="" DeleteEXE="True" DeletePDB="True" Product="" Company="" Trademark="" Copyright="" MajorVersion="0" MinorVersion="0" BuildVersion="0" RevisionVersion="0">
+  <Items>
+    <Item Type="SourceFile" Name="Laba2.pas" Path="Laba2.pas" />
+    <Item Type="SourceFile" Name="Graphics.pas" Path="Graphics.pas" />
+    <Item Type="SourceFile" Name="Logic.pas" Path="Logic.pas" />
+    <Item Type="SourceFile" Name="Mouse.pas" Path="Mouse.pas" />
+    <Item Type="Reference" AssemblyName="System" FullAssemblyName="System.dll" />
+  </Items>
+</Project>

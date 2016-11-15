@@ -33,6 +33,10 @@ namespace ConsoleApplication
             Gl.glRotated(aZ, 0, 0, 1);
             Gl.glTranslated(1.5, 0, 0);
 
+            Gl.glEnable(Gl.GL_TEXTURE_2D);
+            
+            //Glu.gluQuadricTexture();
+
             //основание
             Gl.glTranslated(-1.5, 0, 0);
             Glut.glutSolidSphere(1.1, 50, 50);

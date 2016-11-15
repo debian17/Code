@@ -9,12 +9,12 @@ namespace WebAPI.Models
         public static async Task<string> GetResponseAsync(string path)
         {
             var res = string.Empty;
-            WebRequest request = null;
-            WebResponse response = null;
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
             await Task.Run(async () =>
             {
-                request = WebRequest.Create(path);
-                response = await request.GetResponseAsync();
+                request = (HttpWebRequest) HttpWebRequest.Create(path);
+                response = (HttpWebResponse) await request.GetResponseAsync();
             });
 
             using (Stream stream = response.GetResponseStream())

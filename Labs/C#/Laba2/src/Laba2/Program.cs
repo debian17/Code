@@ -8,37 +8,32 @@ namespace Laba2
     class Place
     {
         bool[] car;
-        int[] InTime;
-        int[] OutTime;
+        public int n_N { get; }
+        public int k_K { get; }
 
         public Place()
         {
             car = new bool[3];
-            InTime = new int[3];
-            OutTime = new int[3];
         }
     }
 
     public class Station
     {
-        const int n = 0;
-        const int N = 10;
-        const int k = 0;
-        const int K = 20;
-        public int WorkTime{ get; }
-
+      
+        private int lost;
         private Place[] m;
 
-        public Station(int mCount, int WorkTime)
+        public Station(int m)
         {
-            m = new Place[mCount];
-            this.WorkTime = WorkTime;
+            this.m = new Place[m];
+            Random r = new Random();
         }
 
-        public void Check()
+        public void add_car()
         {
 
         }
+
     }
 
     public class Program
@@ -46,20 +41,16 @@ namespace Laba2
         public static void Main(string[] args)
         {
             Console.WriteLine("Vvedite kolichestvo mest: ");
-            int mCount = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Vvedite WorkTime:");
-            int wt = Convert.ToInt32(Console.ReadLine());
+            int m = Convert.ToInt32(Console.ReadLine());
 
-            Station S = new Station(mCount,wt);
-            Random r = new Random();
-
-            for(int i = 0; i <S.WorkTime; i++)
+            Station S = new Station(m);
+            int time = 0;
+            
+            for(int i = 0; i < 200; i++)
             {
-                
 
             }
 
-            
 
         }
     }
