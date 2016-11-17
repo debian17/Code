@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Laba2
+{
+    public class Place
+    {
+        public bool[] car;
+        public int n_N;
+        public int k_K;
+        public Place()
+        {
+            car = new bool[3];
+        }
+
+        public int generate_n_N()
+        {
+            Random r = new Random();
+            return r.Next(1, 10);
+        }
+
+        public int generate_k_K()
+        {
+            Random r = new Random();
+            return r.Next(5, 10);
+        }
+    }
+
+    public class Station
+    {
+        public Place[] m;
+        public int lost;
+        public Station(int count)
+        {
+            m = new Place[count];
+            lost = 0;
+        }
+
+        public void add_car()
+        {
+
+        }
+
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Vvedite kolichestvo mest: ");
+            int c = Convert.ToInt32(Console.ReadLine());
+
+            Station S = new Station(c);
+            int[] timeN = new int[S.m.Length];
+            int[] timeK = new int[S.m.Length];
+
+      
+
+
+        }
+    }
+}

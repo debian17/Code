@@ -1,0 +1,39 @@
+      for (int i = 0; i < 200; i++)
+            {
+                if (i == 0)
+                {
+                    for(int k = 0; k < S.m.Length; k++)
+                    {
+                        S.m[k].n_N = S.m[k].generate_n_N();
+                    }
+                }
+
+                for(int h = 0; h < S.m.Length; h++)
+                {
+                    if (S.m[h].n_N == timeN[h])
+                    {
+                        bool flag = false;
+                        for(int l = 0; l < 3; l++)
+                        {
+                            if (S.m[h].car[l] == false)
+                            {
+                                S.m[h].car[l] = true;
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if (flag == false)
+                        {
+                            S.lost++;
+                        }
+                    }
+                }
+
+                for(int j = 0; j < S.m.Length; j++)
+                {
+                    if (S.m[j].k_K == timeK[j])
+                    {
+                        S.m[j].
+                    }
+                }
+            }
