@@ -1,0 +1,59 @@
+#playGround{
+    margin-left: 700px;
+    width:700px;
+    height: 700px;
+    float:left;
+}
+#PlayTable{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    font-size: 16pt;
+}
+
+h1{
+    text-align: center;
+}
+
+#BTN{
+    left: 300px;
+    top: 300px;
+    font-size: 25pt;
+}
+.sudoku{
+    display: inline-table;
+    border: solid 2px;
+    border-spacing: 1px;
+    font-size: 40px;
+}
+.sudoku td{
+    border: solid 1px;
+    width: 50px;
+    height: 50px;
+}
+.sudoku td.top{
+    border-top: solid 2px;
+}
+.sudoku td.bottom{
+    border-bottom: solid 2px;
+}
+.sudoku td.left{
+    border-left: solid 2px;
+}
+.sudoku td.right{
+    border-right: solid 2px;
+}
+.sudoku input{
+    width: inherit;
+    height: inherit;
+    padding: 0;
+    text-align: center;
+    color: brown;
+    background:none;
+    font-size: 40px;
+}
+.timer .display{
+    margin-top: 30px;
+    margin-left: 150px;
+    font-size: 25px;
+}

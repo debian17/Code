@@ -30,7 +30,6 @@ begin
   IN_ACTIVE := 0;
   IN_PASSIVE := 0;
   SetFontSize(14);
-  SetFontColor(clBlue);
   write('¬ведите размер пол€:  ');
   readln(FIELD_SIZE);
   writeln(FIELD_SIZE);
@@ -38,10 +37,10 @@ begin
     for var j := 1 to FIELD_SIZE do
       FIELD_GAME[i, j] := 7;
   ARRAY_CLONE();
-  Write('¬ведите сколько активных объектов: ');
+  Write('¬ведите сколько активных объектов:');
   ReadLN(ACTIVE);
   writeln(ACTIVE);
-  Write('¬ведите сколько пассивных объектов: ');
+  Write('¬ведите сколько пассивных объектов:');
   ReadLN(PASSIVE);
   writeln(PASSIVE);
   write('¬ведите количество шагов: ');

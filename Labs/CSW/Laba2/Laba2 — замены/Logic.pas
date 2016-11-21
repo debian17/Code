@@ -231,7 +231,7 @@ begin
         
       end;
   DRAW(false);
-  ARRAY_CLONE(); 
+  ARRAY_CLONE();
   LockDrawing;
   DRAW(false);
   Redraw;
@@ -286,10 +286,10 @@ begin
       if (FIELD_GAME[i, j] = 2) then
       begin
         LockDrawing;
-        SetPenColor(clLightCyan);
-        SetBrushColor(clLightCyan);
+        SetPenColor(clYellow);
+        SetBrushColor(clYellow);
         rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
-        SetFontSize(8);
+        SetFontSize(10);
         TextOut(10 + round(CELL_WIDTH / 2 + (i - 1) * CELL_WIDTH), 10 + round(CELL_WIDTH / 2 + (j - 1) * CELL_WIDTH), FIELD_GAME[i, j].ToString());
         C_N_ACTIVE();
         FIELD_GAME[i, j] := 0;

@@ -1,6 +1,5 @@
-html{
-    font-size:20px;
-    font-family: Arial, sans-serif;
+body{
+    font-size:25px;
 }
 #playGround{
     width: 100%;
@@ -10,11 +9,12 @@ html{
     display: inline-table;
     border: solid 2px;
     border-spacing: 1px;
+    background-color:azure;
 }
 .sudoku td{
     border: solid 1px;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 40px;
+    height: 40px;
 }
 .sudoku td.top{
     border-top: solid 2px;
@@ -31,17 +31,18 @@ html{
 .sudoku input{
     width: inherit;
     height: inherit;
+    font-size: 25px;
     padding: 0;
     text-align: center;
     color: brown;
     background:none;
 }
 .sudoku .marked{
-    background-color:skyblue;
+    background-color:dodgerblue;
 }
 .sudoku .mistake{
     background-color:darksalmon;
 }
 .timer .display{
-    margin: 2rem;
+    margin: 50px;
 }

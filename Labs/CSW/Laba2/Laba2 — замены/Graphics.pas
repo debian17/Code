@@ -38,7 +38,6 @@ begin
     x1 += CELL_WIDTH;
   end;
   SetFontSize(14);
-  SetFontColor(clBlue);
   SetBrushColor(Color.White);
   TextOut(10, 70 + CELL_WIDTH * FIELD_SIZE, 'Активные');
   TextOut(250, 70 + CELL_WIDTH * FIELD_SIZE, ACTIVE.ToString);
@@ -47,7 +46,7 @@ begin
   TextOut(250, 100 + CELL_WIDTH * FIELD_SIZE, PASSIVE.ToString);
   SetFontSize(16);
   TextOut(10, 130 + CELL_WIDTH * FIELD_SIZE, 'Осталось тактов');
-  TextOut(250, 130 + CELL_WIDTH * FIELD_SIZE, TAKT.ToString);  
+  TextOut(250, 130 + CELL_WIDTH * FIELD_SIZE, TAKT.ToString);
   SetFontSize(16);
   TextOut(100 + CELL_WIDTH * FIELD_SIZE, 20 + CELL_WIDTH * FIELD_SIZE, 'Такт');
   if(IN_TAKT - TAKT - 1) >= 0 then
@@ -71,7 +70,7 @@ begin
         begin
           SetPenColor(clWhite);
           SetBrushColor(clWhite);
-          circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
+          rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
           SetPenColor(clBlack);
           SetBrushColor(clBlack);
           continue;
@@ -80,7 +79,7 @@ begin
         begin
           SetPenColor(clRed);
           SetBrushColor(clRed);
-          circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
+          rectangle(CELL_WIDTH * i + 2 + CELL_WIDTH * FIELD_SIZE, CELL_WIDTH * j - 18, CELL_WIDTH * i + 29 + CELL_WIDTH * FIELD_SIZE, CELL_WIDTH * j + 9);
           SetPenColor(clBlack);
           SetBrushColor(clBlack);
           continue;
@@ -88,9 +87,9 @@ begin
         if (FIELD_GAME_PREV[i, j] = -2) then
         begin
           FIELD_GAME[i, j] := 7;
-          SetPenColor(clYellow);
-          SetBrushColor(clYellow);
-          circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
+          SetPenColor(clGray);
+          SetBrushColor(clGray);
+          rectangle(CELL_WIDTH * i + 2 + CELL_WIDTH * FIELD_SIZE, CELL_WIDTH * j - 18, CELL_WIDTH * i + 29 + CELL_WIDTH * FIELD_SIZE, CELL_WIDTH * j + 9);
           SetFontSize(8);
           TextOut(30 + CELL_WIDTH * FIELD_SIZE + round(CELL_WIDTH / 2 + (i - 1) * CELL_WIDTH), 10 + round(CELL_WIDTH / 2 + (j - 1) * CELL_WIDTH), FIELD_GAME_PREV[i, j].ToString()); 
           SetPenColor(clBlack);
@@ -100,7 +99,7 @@ begin
         end;       
         SetPenColor(clCyan);
         SetBrushColor(clCyan);
-        circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
+        rectangle(CELL_WIDTH * i + 2 + CELL_WIDTH * FIELD_SIZE, CELL_WIDTH * j - 18, CELL_WIDTH * i + 29 + CELL_WIDTH * FIELD_SIZE, CELL_WIDTH * j + 9);
         SetPenColor(clBlack);
         SetBrushColor(clCyan);
         SetFontSize(8);
@@ -116,25 +115,23 @@ begin
         FIELD_GAME[i, j] := 7;
         SetPenColor(clWhite);
         SetBrushColor(clWhite);
-        //rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
-        circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
-        SetPenColor(clBlack);
-        SetBrushColor(clBlack);
-        continue;
-      end; 
-      if (FIELD_GAME[i, j] = 5) then
-      begin
-        SetPenColor(clLime);
-        SetBrushColor(clRed);
-        //circle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
-        circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
+        rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
         SetPenColor(clBlack);
         SetBrushColor(clBlack);
         continue;
       end;
+      if (FIELD_GAME[i, j] = 5) then
+      begin
+        SetPenColor(clRed);
+        SetBrushColor(clRed);
+        rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
+        SetPenColor(clBlack);
+        SetBrushColor(clBlack);
+        continue;
+      end;    
       SetPenColor(clCyan);
       SetBrushColor(clCyan);
-      circle(CELL_WIDTH * i - 15, CELL_WIDTH * j - 15, 20);
+      rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
       SetPenColor(clBlack);
       SetBrushColor(clCyan);
       SetFontSize(8);

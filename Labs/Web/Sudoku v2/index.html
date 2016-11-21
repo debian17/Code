@@ -1,0 +1,21 @@
+<!doctype html>
+<head>
+    <title>Судоку</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Sudoku</h1>
+    <div id = "playGround"></div>
+    <div id = "PlayTable">
+        <p>Выберите уровень сложности:</p>
+        <input id="rbtn" type="radio" name="lvl"> Для детей
+        <input id="rbtn" type="radio" name="lvl"> По середине
+        <input id="rbtn" type="radio" name="lvl"> Невозможно сложно<br><br>
+        <div id="predstav">Как вас величать?</div><input id="inputName"><br><br>
+        <button id="BTN" onclick="program()">Начать игру!</button><br><br>
+        <div id="tt">Турнирная таблица:</div>
+        <div id="linesTable"></div>
+    </div>
+    <script src="Code.js"></script>
+</body>
