@@ -57,8 +57,8 @@ public class Main {
         double TEMP;
         do{
             TEMP=0;
-            for(int i=1;i<NY-1;i++){
-                for (int j=1;j<NX-1;j++){
+            for(int i=1;i<NX-2;i++){
+                for (int j=1;j<NY-2;j++){
                     M0 = i+j*NX;
                     M1 = M0+1;
                     M2 = M0-1;
@@ -72,7 +72,6 @@ public class Main {
                     }
                 }
             }
-
         }while (TEMP>=E);
     }
 
@@ -85,8 +84,8 @@ public class Main {
             }
         }
 
-        for(int i=1;i<NY-1;i++){
-            for(int j=1;j<NX-1;j++){
+        for(int i=0;i<NX;i++){
+            for(int j=0;j<NY;j++){
                 if((10<=j) && (j<=20) && (10<=i) && (i<=20)){
                     C[i][j]=(Math.sin(PI*(j-10)/10)) * (Math.sin(PI*(i-10)/10));
                 }
@@ -96,14 +95,20 @@ public class Main {
             }
         }
 
-        //запись в файл №1
+
         try {
             FileWriter fw = new FileWriter("1.prn",false);
-            for(int i=1;i<NY-1;i++){
-                for(int j=1;j<NX-1;j++){
+            for(int i=0;i<NX;i++){
+                for(int j=0;j<NY;j++){
                     String buf = Double.toString(C[i][j]);
-                    fw.write(buf);
-                    fw.write(" ");
+                    if(C[i][j]==0){
+                        fw.write("0");
+                        fw.write(" ");
+                    }
+                    else{
+                        fw.write(buf);
+                        fw.write(" ");
+                    }
                 }
                 fw.append("\r\n");
             }
@@ -126,14 +131,14 @@ public class Main {
 
         double T = 0;
         do {
-            for(int i=1;i<NY-1;i++){
-                for(int j=1;j<NX-1;j++){
+            for(int i=1;i<NX-2;i++){
+                for(int j=1;j<NY-2;j++){
                     M0 = i+j*NX;
                     M1 = M0 +1;
                     M2 = M0 -1;
                     M3 = M0 + NX;
                     M4 = M0 -NX;
-                    M24 = M0 - 1 - NX;
+                    M24 = M0 - NX - 1;
 
                     Q1 = (O[M0]+O[M4])/2;
                     Q2 = (O[M2]+O[M24])/2;
@@ -141,20 +146,26 @@ public class Main {
                     Q4 = (O[M4]+O[M24])/2;
                     Q0 = (Q1 + Q2)/2;
 
-                    Bm1 = (-U/(HX*2) + MU/(HX*HX))*Q1;
+                    /*Bm1 = (-U/(HX*2) + MU/(HX*HX))*Q1;
                     Bm2 = (U /(HX*2) + MU/(HX*HX))*Q2;
                     Bm3 = (-V /(HY*2) + MU/(HY*HY))*Q3;
-                    Bm4 = (V /(HY*2) + MU/(HY*HY))*Q4;
+                    Bm4 = (V /(HY*2) + MU/(HY*HY))*Q4;*/
 
-                    B1[M0] = Bm1*SIGMA;
-                    B2[M0] = Bm2*SIGMA;
-                    B3[M0] = Bm3*SIGMA;
-                    B4[M0] = Bm4*SIGMA;
+                    B1[M0] = Q1 * (-(U*2))/(HX*4) + (MU*2)/(HX*HX*2);
+                    B2[M0] = Q2 * ((U*2))/(HX*4) + (MU*2)/(HX*HX*2);
+                    B3[M0] = Q3 * (-(V*2))/(HY*4) + (MU*2)/(HY*HY*2);
+                    B4[M0] = Q4 * ((V*2))/(HY*4) + (MU*2)/(HY*HY*2);
 
-                    B6[M0] = Bm1 * (1-SIGMA);
-                    B7[M0] = Bm2 * (1-SIGMA);
-                    B8[M0] = Bm3 * (1-SIGMA);
-                    B9[M0] = Bm4 * (1-SIGMA);
+                    B6[M0] = B1[M0] * (1-SIGMA);
+                    B7[M0] = B2[M0] * (1-SIGMA);
+                    B8[M0] = B3[M0] * (1-SIGMA);
+                    B9[M0] = B4[M0] * (1-SIGMA);
+
+                    B1[M0] = B1[M0]*SIGMA;
+                    B2[M0] = B2[M0]*SIGMA;
+                    B3[M0] = B3[M0]*SIGMA;
+                    B4[M0] = B4[M0]*SIGMA;
+
 
                     A[M0] = Q0/HT + B1[M0] + B2[M0] + B3[M0] + B4[M0];
                     B5[M0] = Q0/HT - B6[M0] - B7[M0] - B8[M0] - B9[M0];
@@ -166,16 +177,21 @@ public class Main {
             T+=HT;
         }while (T<=LT);
 
-        //запись в файл №2
         l=0;
         try{
             FileWriter fw = new FileWriter("2.prn", false);
-            while (l<=Z.length-1){
+            while (l<NX*NY){
                 String buf = Double.toString(Z[l]);
-                fw.write(buf);
-                fw.write(" ");
-                if(l%NX == 0){
-                    fw.append("\r\n");
+                if(Z[l]==0){
+                    fw.write("0");
+                    fw.write("  ");
+                }
+                else{
+                    fw.write(buf);
+                    fw.write("  ");
+                }
+                if(l % NX == 0){
+                    fw.write("\r\n");
                 }
                 l++;
             }
