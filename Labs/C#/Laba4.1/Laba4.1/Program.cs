@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace Laba4
         static void DoTaskWork(string fileName)
         {
                 StreamReader sr = new StreamReader(fileName);
+                //ConcurrentDictionary 
                 Dictionary<string, int> User = new Dictionary<string, int>();
                 Dictionary<string, int> Domen = new Dictionary<string, int>();
                 Dictionary<string, int> Date = new Dictionary<string, int>();
@@ -66,7 +68,7 @@ namespace Laba4
                 while (!sr.EndOfStream)
                 {
                     str = sr.ReadLine();
-                    temp = str.Split(' ');
+                    temp = str.Split(' ');       
                     if (User.ContainsKey(temp[0]))
                     {
                         User[temp[0]] += Convert.ToInt32(temp[3]);
@@ -156,24 +158,25 @@ namespace Laba4
 
 
 
-            //Task t = new Task(() => DoTaskWork("logfile0.txt"));
-            //t.Start();
-            //t.Wait();
-
-
-
             Console.WriteLine("Vvedite kolichestvo failov:");
             int n = Convert.ToInt32(Console.ReadLine());
-            Task[] t = new Task[n];
-            for (int i = 0; i < n; i++)
+
+            Task One = Task.Run(() =>
             {
-                t[i] = new Task(() => DoTaskWork("logfile" + i + ".txt"));
-                t[i].Start();
-            }
-            Task.WaitAll(t);
+                Task[] t = new Task[n];
+                for (int i = 0; i < n; i++)
+                {
+                    int temp = i;
+                    t[temp] = new Task(() => DoTaskWork("logfile" + temp + ".txt"));
+                    t[temp].Start();
+                    Console.WriteLine("запустилась задача "+temp);
+                }
+                Task.WaitAll(t);
+            }).ContinueWith((t)=> {
+                GetResult();
+            });
 
-
-            GetResult();       
+            Task.WaitAll(One); 
         }
     }
 }
