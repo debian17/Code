@@ -275,9 +275,10 @@ begin
       if (FIELD_GAME[i, j] = -2) then
       begin
         LockDrawing;
-        SetPenColor(clGray);
-        SetBrushColor(clGray);
-        rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
+        SetPenColor(clRed);
+        SetBrushColor(clRed);
+        //BATMAN.Draw(CELL_WIDTH* i + 2 + CELL_WIDTH* FIELD_SIZE-290, CELL_WIDTH* j - 30, 40, 40);
+        //rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
         SetFontSize(8);
         TextOut(10 + round(CELL_WIDTH / 2 + (i - 1) * CELL_WIDTH), 10 + round(CELL_WIDTH / 2 + (j - 1) * CELL_WIDTH), FIELD_GAME[i, j].ToString());      
         Redraw();
@@ -286,9 +287,10 @@ begin
       if (FIELD_GAME[i, j] = 2) then
       begin
         LockDrawing;
-        SetPenColor(clYellow);
-        SetBrushColor(clYellow);
-        rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
+        SetPenColor(clRed);
+        SetBrushColor(clRed);
+        //BATMAN.Draw(CELL_WIDTH* i + 2 + CELL_WIDTH* FIELD_SIZE-290, CELL_WIDTH* j - 30, 40, 40);
+        //rectangle(CELL_WIDTH * i - 18, CELL_WIDTH * j - 18, CELL_WIDTH * i + 9, CELL_WIDTH * j + 9);
         SetFontSize(10);
         TextOut(10 + round(CELL_WIDTH / 2 + (i - 1) * CELL_WIDTH), 10 + round(CELL_WIDTH / 2 + (j - 1) * CELL_WIDTH), FIELD_GAME[i, j].ToString());
         C_N_ACTIVE();

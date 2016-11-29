@@ -23,6 +23,7 @@ begin
     Rectangle(WIDTH - 298, HEIGHT - 8, WIDTH - 448, HEIGHT - 58);
     SetPenColor(clWhite);
     SetBrushColor(clWhite);
+    //Circle(CELL_WIDTH * i - 20, CELL_WIDTH * j - 20, 20);
     Rectangle(WIDTH - 300, HEIGHT - 10, WIDTH - 450, HEIGHT - 60);
     SetFontSize(20);
     TextOut(WIDTH - 400, HEIGHT - 50, 'Игра окончена!');

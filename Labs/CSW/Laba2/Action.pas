@@ -422,7 +422,8 @@ begin
         SetPenColor(Color.Red);
            //
         //Line(10+step*n + round(step / 2 + (i - 1) * step), 10 + round(step / 2 + (j - 1) * step),10+step*n + round(step / 2 + (x - 1) * step), 10 + round(step / 2 + (y - 1) * step));
-        Line(10 + round(step / 2 + (i - 1) * step), 10 + round(step / 2 + (j - 1) * step), 10 + round(step / 2 + (x - 1) * step), 10 + round(step / 2 + (y - 1) * step));Line(10 + round(step / 2 + (i - 1) * step), 10 + round(step / 2 + (j - 1) * step), 10 + round(step / 2 + (x - 1) * step), 10 + round(step / 2 + (y - 1) * step));
+        Line(10 + round(step / 2 + (i - 1) * step), 10 + round(step / 2 + (j - 1) * step), 10 + round(step / 2 + (x - 1) * step), 10 + round(step / 2 + (y - 1) * step));
+        Line(10 + round(step / 2 + (i - 1) * step), 10 + round(step / 2 + (j - 1) * step), 10 + round(step / 2 + (x - 1) * step), 10 + round(step / 2 + (y - 1) * step));
         Redraw();
         Sleep(2000);
       end;

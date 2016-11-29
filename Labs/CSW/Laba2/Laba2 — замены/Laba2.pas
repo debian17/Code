@@ -17,7 +17,8 @@ var
   PASSIVE: integer;//количество пассивных объектов
   IN_TAKT: integer;
   TAKT: integer; //количество тактов
-  
+  BATMAN : Picture;
+  SUPERMAN : Picture;
   FIELD_GAME: array[1..20, 1..20] of integer;//игровое поле
   FIELD_GAME_PREV: array[1..20, 1..20] of integer;//копия поля, для прорисовки предыдущего шага
 
