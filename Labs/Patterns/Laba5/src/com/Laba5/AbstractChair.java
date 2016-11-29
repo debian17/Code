@@ -12,5 +12,4 @@ public abstract class AbstractChair {
 
     public abstract String GetMaterial();
     public abstract boolean GetBack();
-
 }

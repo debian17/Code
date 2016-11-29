@@ -4,7 +4,6 @@ public class ChelyabinskFactory extends AbstractFactory {
 
     private String MATERIAL_TYPE = "Чугун";
 
-
     public ChelyabinskFactory(String Name) {
         super(Name);
     }

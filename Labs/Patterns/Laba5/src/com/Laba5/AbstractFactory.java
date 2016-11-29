@@ -12,5 +12,4 @@ public abstract class AbstractFactory {
 
     public abstract AbstractChair CreateManChair(boolean BACK);
     public abstract AbstractChair CreateKidChair(boolean BACK);
-
 }
