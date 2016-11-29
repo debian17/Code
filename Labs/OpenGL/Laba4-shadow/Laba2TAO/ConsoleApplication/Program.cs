@@ -2,62 +2,21 @@
 using Tao.OpenGl;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Threading;
 
 namespace ConsoleApplication
 {
     internal class Program
     {
-        public static double eye_x, eye_y, eye_z, scale, aX, aY, aZ, angle;
-        public static int[] texture = new int[7];
-        public static float[] light = new float[4] { 10F, 10F, 1, 1 };
-        public static float[] fshadowMatrix = new float[16];
-        public static float[] plane = { 0, 1, 0, 0 };
-        public static float[] depthLight;
-        public static float[] depthView;
-        public static Glu.GLUquadric quadratic;
+        private static double eye_x, eye_y, eye_z, scale, aX, aY, aZ, angle;
+        public static int[] texture = new int[6];
+        static float[] light = new float[3] { 1, 0.5F, 1 };
+        // depth buffer
+        private static float[] depthLight;
+        private static float[] depthView;
 
-        public static Bitmap LoadPicture(string filename)
-        {
-            return new Bitmap(filename);
-        }
+        static Glu.GLUquadric quadratic;
 
-        public static void SetShadowMatrix(float[] fDestMat, float[] fLightPos, float[] fPlane)
-        {
-            float dot;
-
-            // dot product of plane and light position
-            dot = fPlane[0] * fLightPos[0] +
-                    fPlane[1] * fLightPos[1] +
-                    fPlane[1] * fLightPos[2] +
-                    fPlane[3] * fLightPos[3];
-
-            // first column
-            fDestMat[0] = dot - fLightPos[0] * fPlane[0];
-            fDestMat[4] = 0.0f - fLightPos[0] * fPlane[1];
-            fDestMat[8] = 0.0f - fLightPos[0] * fPlane[2];
-            fDestMat[12] = 0.0f - fLightPos[0] * fPlane[3];
-
-            // second column
-            fDestMat[1] = 0.0f - fLightPos[1] * fPlane[0];
-            fDestMat[5] = dot - fLightPos[1] * fPlane[1];
-            fDestMat[9] = 0.0f - fLightPos[1] * fPlane[2];
-            fDestMat[13] = 0.0f - fLightPos[1] * fPlane[3];
-
-            // third column
-            fDestMat[2] = 0.0f - fLightPos[2] * fPlane[0];
-            fDestMat[6] = 0.0f - fLightPos[2] * fPlane[1];
-            fDestMat[10] = dot - fLightPos[2] * fPlane[2];
-            fDestMat[14] = 0.0f - fLightPos[2] * fPlane[3];
-
-            // fourth column
-            fDestMat[3] = 0.0f - fLightPos[3] * fPlane[0];
-            fDestMat[7] = 0.0f - fLightPos[3] * fPlane[1];
-            fDestMat[11] = 0.0f - fLightPos[3] * fPlane[2];
-            fDestMat[15] = dot - fLightPos[3] * fPlane[3];
-        }
-
-        public static void Shadow()
+        private static void Shadows()
         {
             double[] modelviewMatrix = new double[16];
             double[] projectionMatrix = new double[16];
@@ -84,9 +43,10 @@ namespace ConsoleApplication
             // get the transformation from light view
             Gl.glPushMatrix();
             Gl.glLoadIdentity();
-            Glu.gluLookAt(p[0], p[1], p[2], 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+            Glu.gluLookAt(p[0], p[1], p[2], 0.0, 0.0, 0.0, 1.0, 0.0, 0.0);
             Gl.glGetDoublev(Gl.GL_MODELVIEW_MATRIX, modelviewLight);
             Gl.glPopMatrix();
+            
 
             // set the project matrix to orthographic
             Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -103,9 +63,12 @@ namespace ConsoleApplication
             Gl.glReadPixels(0, 0, 1000, 1000, Gl.GL_DEPTH_COMPONENT, Gl.GL_FLOAT, depthView);
 
             // get pointers to the depth buffers
+            localDepthView = new float[1000 * 1000];
+            localDepthLight = new float[1000 * 1000];
+            
             localDepthView = depthView;
             localDepthLight = depthLight;
-
+            //System.Console.WriteLine(localDepthView.Length);
             int i = 0;
             // go through every pixel in frame buffer
             for (y = 0; y < 1000; y++)
@@ -158,18 +121,22 @@ namespace ConsoleApplication
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
         }
 
+
+        public static Bitmap LoadPicture(string filename)
+        {
+            return new Bitmap(filename);
+        }
+
         static void LoadTexture()
         {
-            Bitmap[] textureImg = new Bitmap[7];
+            Bitmap[] textureImg = new Bitmap[6];
             textureImg[0] = LoadPicture("s.bmp");
             textureImg[1] = LoadPicture("hand.bmp");
             textureImg[2] = LoadPicture("heat.bmp");
             textureImg[3] = LoadPicture("eye.bmp");
             textureImg[4] = LoadPicture("nose.bmp");
             textureImg[5] = LoadPicture("rot.bmp");
-            textureImg[6] = LoadPicture("w.bmp");
-
-            Gl.glGenTextures(7, texture);
+            Gl.glGenTextures(6, texture);
             textureImg[0].RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             Rectangle rectangle = new Rectangle(0, 0, textureImg[0].Width, textureImg[0].Height);
@@ -226,29 +193,16 @@ namespace ConsoleApplication
             textureImg[5].UnlockBits(bitmapData);
             textureImg[5].Dispose();
 
-            rectangle = new Rectangle(0, 0, textureImg[6].Width, textureImg[6].Height);
-            bitmapData = textureImg[6].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[6]);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
-            Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImg[6].Width, textureImg[6].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-            textureImg[6].UnlockBits(bitmapData);
-            textureImg[6].Dispose();
-
         }
 
         static void Init_graphics()
             {
-            LoadTexture();
-            
+            //LoadTexture();
             Gl.glEnable(Gl.GL_TEXTURE_2D);
             Gl.glShadeModel(Gl.GL_SMOOTH);
-            Gl.glFrontFace(Gl.GL_CCW);
-            Gl.glPolygonMode(Gl.GL_FRONT_AND_BACK, Gl.GL_FILL);
-            Gl.glLineWidth(2.0f);
-            Gl.glLightModeli(Gl.GL_FRONT, Gl.GL_TRUE);
             Gl.glEnable(Gl.GL_LIGHTING);
             Gl.glEnable(Gl.GL_LIGHT0);
+            
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, light);
             Gl.glEnable(Gl.GL_DEPTH_TEST);
             Gl.glClearColor(1, 1, 1, 1);
@@ -262,39 +216,27 @@ namespace ConsoleApplication
             eye_z = 0;
             scale = 0.1;
             angle = 2;
-            
-            SetShadowMatrix(fshadowMatrix,light,plane);
             }
 
-        static void OnDisplay()
+        static void Render()
         {
-            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-            Gl.glLoadIdentity();
-            Glu.gluLookAt(eye_x, eye_y, eye_z, 0, -10, 0, 1, 0, 0);
 
-            //Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[6]);
             Gl.glRotated(90, 0, 1, 0);
-            Gl.glTranslated(0, 0, -1);
-            Glu.gluDisk(quadratic, 0, 20, 50, 50);
+            Glu.gluDisk(quadratic, 0, 15, 50, 50);
             Gl.glRotated(-90, 0, 1, 0);
-
-            Gl.glPushMatrix();
-            Gl.glRotated(aX, 1, 0, 0);
-            Gl.glRotated(aY, 0, 1, 0);
-            Gl.glRotated(aZ, 0, 0, 1);
-            Gl.glTranslated(2.5, 0, 0);
-
+            Gl.glTranslated(3, 0, 0);
             //основание
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
             Gl.glTranslated(-1.5, 0, 0);
             Glu.gluSphere(quadratic, 1.1, 50, 50);
-            //Gl.glPopMatrix();
             //Glut.glutSolidSphere(1.1, 50, 50);
 
             //тело
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
+            Gl.glPushMatrix();
             Gl.glTranslated(1.6, 0, 0);
             Glu.gluSphere(quadratic, 0.75, 50, 50);
+            Gl.glPopMatrix();
             //Glut.glutSolidSphere(0.75, 50, 50);
 
             //голова
@@ -326,13 +268,13 @@ namespace ConsoleApplication
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[4]);
             Gl.glTranslated(0, 0.3, -0.4);
             Gl.glRotated(275, 1, 0, 0);
-            Glu.gluCylinder(quadratic, 0.07,0,0.75, 50, 50);
+            Glu.gluCylinder(quadratic, 0.07, 0, 0.75, 50, 50);
             //Glut.glutSolidCone(0.07, 0.75, 50, 50);
 
             //правый глаз
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[3]);
             Gl.glTranslated(-0.2, -0.25, 0.15);
-            Glu.gluSphere(quadratic,0.05, 50, 50);
+            Glu.gluSphere(quadratic, 0.05, 50, 50);
             //Glut.glutSolidSphere(0.05, 50, 50);
 
             //левый глаз
@@ -345,7 +287,7 @@ namespace ConsoleApplication
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[1]);
             Gl.glTranslated(-0.47, 0.4, 0.0175);
             Gl.glRotated(90, 0, 1, 0);
-            Glu.gluCylinder(quadratic, 0.05,0.05, 0.5, 50, 50);
+            Glu.gluCylinder(quadratic, 0.05, 0.05, 0.5, 50, 50);
             //Glut.glutSolidCylinder(0.05, 0.5, 50, 50);
 
             //правый диск
@@ -357,31 +299,46 @@ namespace ConsoleApplication
             Gl.glTranslated(0, 0, 0.5);
             Glu.gluDisk(quadratic, 0, 0.05, 50, 50);
 
-            ////диск основания
-            //Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[6]);
-            //Gl.glTranslated(3, 4, 0);
-            //Gl.glRotated(90, 1, 0, 0);
-            //Glu.gluDisk(quadratic, 0, 10, 50, 50);
+        }
 
+        static void OnDisplay()
+        {
+            
+            int[] buffer = new int[1];
+            float[] p = light;
+            // get the current color buffer being drawn to
+            Gl.glGetIntegerv(Gl.GL_DRAW_BUFFER, buffer);
+            
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+            Gl.glDrawBuffer(Gl.GL_NONE);
+            Gl.glLoadIdentity();
+            Glu.gluLookAt(eye_x, eye_y, eye_z, 0, -10, 0, 1, 0, 0);
+            Gl.glRotated(aX, 1, 0, 0);
+            Gl.glRotated(aY, 0, 1, 0);
+            Gl.glRotated(aZ, 0, 0, 1);
+            Glu.gluLookAt(p[0], p[1], p[2], 0.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+            Render();
 
-            //Thread t = new Thread(Shadow);
-            //t.Start();
-            Shadow();
-            Gl.glPopMatrix();
-            Gl.glMultMatrixf(fshadowMatrix);
+            
+            // save the depth buffer
+            Gl.glReadPixels(0, 0, 1000, 1000, Gl.GL_DEPTH_COMPONENT, Gl.GL_FLOAT, depthLight);
+            Gl.glDrawBuffer(buffer[0]);
+            Gl.glClear(Gl.GL_DEPTH_BUFFER_BIT);
+            Render();
+            Shadows();
             Gl.glFlush();
-            Glut.glutSwapBuffers();
+            Glut.glutSwapBuffers();    
         }
 
         static void OnReshape(int w, int h)
-        {
+            {
                 Gl.glMatrixMode(Gl.GL_PROJECTION);
                 Gl.glLoadIdentity();
                 Gl.glViewport(0, 0, w, h);
                 Glu.gluPerspective(40, w / h, 1, 100);
                 Gl.glMatrixMode(Gl.GL_MODELVIEW);
                 depthLight = new float[1000 * 1000];
-                depthView = new float[1000 * 1000];
+                depthView = new float[1000 * 1000];                
         }
 
         static void UpdateKeys(byte key, int x, int y)
