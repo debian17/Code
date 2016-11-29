@@ -3,11 +3,12 @@ var animal = {
 };
 
 function Rabbit(name) {
+  alert("Выполнилось тело");
   this.name = name;
 }
 
 Rabbit.prototype = animal;
 
-var rabbit = new Rabbit("Кроль");
+var rabbit = new Rabbit("Кролик");
 
-alert( rabbit.eats ); // true
+alert( rabbit.eats );

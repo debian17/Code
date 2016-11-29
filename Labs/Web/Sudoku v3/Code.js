@@ -36,7 +36,7 @@
                this[index] = replace;
            }
        });
-       //Метод подобен shift и pop, но удаляет и возвращает случайный член массива 
+       //Метод удаляет и возвращает случайный член массива 
        Array.method("popRandom", function(){
            return this.splice(Math.floor(Math.random()*this.length), 1)[0];
        });
@@ -50,7 +50,6 @@
            }
            return this; 
        });
-       //Метод добавляет DOM элементу наименование класса, с проверкой на существование
        Element.method("addClass", function(className){
            var classes = this.className.split(" ");
            if (classes.indexOf(className) < 0){
@@ -70,18 +69,12 @@
            return this;
        });
        
-       //создаём глобальный объект, отвечающий за наше приложение
+       //создаём глобальный объект, отвечающий за наше судоку
        var app = {};
        
        app.Sudoku = function(area){
-           //Во избежание потери контекста, записываем переменную this в that
-           //При вызове конструктора контекст - экземпляр нового объекта
            var that = this;
            area = area || 3;
-           //Создаём DOM элемент таблицу, сразу присваиваем ей класс новым методом 
-           //Element.addClass
-           //На этом этапе элемент содержится в памяти, но не на экране. Для отображения
-           //его необходимо вставить в существующий DOM элемент методом appendChild
            var table = document.createElement('table').addClass("sudoku");
            var expo = area * area;
            for (var i=0 ; i<expo ; i+=1){
@@ -140,7 +133,6 @@
                            that.table.rows[rowNumber].cells[colNumber].editCell = editCell;
                            //добавляем событие на изменение значения поля
                            editCell.addEventListener("change",function(){
-                               //метод проверки, описан ниже
                                that.check();
                            });
                            proccessing = false;
@@ -212,7 +204,7 @@
            },
        }
        
-       //Конструктор, который будет отвечать за генерацию базовых
+       //Генератор, который будет отвечать за генерацию базовых
        //значений и методы перемешивания
        app.Generator = function(area){
            var that = this;
@@ -372,7 +364,6 @@
         } 
     }
        
-
        //точка входа
        var program = function(){
            document.getElementById("playGround").innerHTML="";
@@ -381,10 +372,10 @@
                app.parameters.hided=1;
            }
            if(lvlarr[1].checked==true){
-               app.parameters.hided=30;
+               app.parameters.hided=3;
            }
            if(lvlarr[2].checked==true){
-               app.parameters.hided=45;
+               app.parameters.hided=5;
            }
            var CurName = document.getElementById("inputName").value;
            if(CurName==""){
@@ -394,6 +385,7 @@
            else{
                app.parameters.Players.push(CurName);
            }
+           
            document.getElementById("inputName").value="";
            
            var tbl = new app.Sudoku(app.parameters.area);
@@ -403,7 +395,7 @@
            generator.swapColumnsRange(app.parameters.shuffle)
                     .swapRowsRange(app.parameters.shuffle)
                     .swapColumns(app.parameters.shuffle)
-                    .swapRows(app.parameters.shuffle)
+                    .swapRows(app.parameters.shuffle);
            tbl.fill(generator.values);
            tbl.hide(app.parameters.hided);
            var timer = new app.Timer();
