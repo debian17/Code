@@ -12,9 +12,7 @@ public class Main {
         AbstractChair ac = c.GetManChair(0,true);
         System.out.println("Метариал="+ac.GetMaterial()+" Спинка="+ac.BACK);
 
-        AbstractTube at = c.GetBigTube(1,100);
+        AbstractTube at = c.GetBigTube(0,100);
         System.out.println("Метариал="+at.GetMaterial()+" Длина="+at.LENGTH);
-
-
     }
 }
