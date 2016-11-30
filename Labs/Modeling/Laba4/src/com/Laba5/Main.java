@@ -6,7 +6,6 @@ import java.io.IOException;
 public class Main {
 
     static int N = 100;
-    static double LX = 100;
     static double LT = 100;
     static double HT = 0.1;
     static double T = LT / HT;
