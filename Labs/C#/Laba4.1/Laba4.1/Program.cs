@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Laba4
@@ -53,13 +54,14 @@ namespace Laba4
                         DateSum.Add(Date.ElementAt(i).Key, Date.ElementAt(i).Value);
                     }
                 }
-            }       
+            }
         }
 
         static void DoTaskWork(string fileName)
         {
+            try
+            {
                 StreamReader sr = new StreamReader(fileName);
-                //ConcurrentDictionary 
                 Dictionary<string, int> User = new Dictionary<string, int>();
                 Dictionary<string, int> Domen = new Dictionary<string, int>();
                 Dictionary<string, int> Date = new Dictionary<string, int>();
@@ -68,7 +70,7 @@ namespace Laba4
                 while (!sr.EndOfStream)
                 {
                     str = sr.ReadLine();
-                    temp = str.Split(' ');       
+                    temp = str.Split(' ');
                     if (User.ContainsKey(temp[0]))
                     {
                         User[temp[0]] += Convert.ToInt32(temp[3]);
@@ -96,12 +98,20 @@ namespace Laba4
                 }
                 sr.Close();
                 WriteToGlobalDictionary(User, Domen, Date);
+            }
+            catch (FormatException e)
+            {
+                //Console.WriteLine(e.Message);
+                return;
+            }
         }
 
-        static void GetResult()
+        static void GetResult(string Path_directory)
         {
             StreamWriter sw;
             FileInfo file;
+
+            //file = new FileInfo(Path_directory+"\\" + "User.txt");
             file = new FileInfo("User.txt");
             sw = file.AppendText();
             for (int i = 0; i < UserSum.Count; i++)
@@ -111,6 +121,7 @@ namespace Laba4
             sw.Flush();
             sw.Close();
 
+            //file = new FileInfo(Path_directory+"\\" + "Domen.txt");
             file = new FileInfo("Domen.txt");
             sw = file.AppendText();
             for (int i = 0; i < DomenSum.Count; i++)
@@ -120,6 +131,7 @@ namespace Laba4
             sw.Flush();
             sw.Close();
 
+            //file = new FileInfo(Path_directory+"\\" + "Date.txt");
             file = new FileInfo("Date.txt");
             sw = file.AppendText();
             for (int i = 0; i < DateSum.Count; i++)
@@ -150,33 +162,41 @@ namespace Laba4
             //    sw = file.AppendText();
             //    for (int j = 0; j < l; j++)
             //    {
-            //        sw.WriteLine(Users[rand.Next(0, 6)] + " " + Domens[rand.Next(0, 6)] + " " + Dates[rand.Next(0, 6)] + " " + rand.Next(1, 100000));
+            //        sw.WriteLine(Users[rand.Next(0, 6)] + " " + Domens[rand.Next(0, 6)] + " " + Dates[rand.Next(0, 6)] + " " + rand.Next(1, 1000));
             //    }
             //    sw.Flush();
             //    sw.Close();
             //}
 
-
-
-            Console.WriteLine("Vvedite kolichestvo failov:");
-            int n = Convert.ToInt32(Console.ReadLine());
-
-            Task One = Task.Run(() =>
+            Task DirectoryWork = Task.Run(() =>
             {
+                Console.WriteLine("Input path to directory:");
+                string path = Console.ReadLine();
+                var files = Directory.GetFiles(path).Where(p => Path.GetExtension(p) == ".txt").ToArray();
+                return files;
+            }).ContinueWith((files) =>
+            {
+                string[] tempfile = files.Result;
+                int n = tempfile.Length;
                 Task[] t = new Task[n];
                 for (int i = 0; i < n; i++)
                 {
                     int temp = i;
-                    t[temp] = new Task(() => DoTaskWork("logfile" + temp + ".txt"));
+                    t[temp] = new Task(() => DoTaskWork(tempfile[temp]));
                     t[temp].Start();
-                    Console.WriteLine("запустилась задача "+temp);
+                    Console.WriteLine("Зпустилась задача №" + temp);
                 }
                 Task.WaitAll(t);
-            }).ContinueWith((t)=> {
-                GetResult();
+                FileInfo f = new FileInfo(tempfile[0]);
+                string dir_path = f.DirectoryName;
+                return dir_path;
+            }).ContinueWith((dir_path) =>
+            {
+                string p = dir_path.Result;
+                GetResult(p);
+                Task.WaitAll();
             });
-
-            Task.WaitAll(One); 
+            Task.WaitAll(DirectoryWork);
         }
     }
 }
