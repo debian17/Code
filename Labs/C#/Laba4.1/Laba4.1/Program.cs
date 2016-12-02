@@ -187,7 +187,7 @@ namespace Laba4
                     Console.WriteLine("Зпустилась задача №" + temp);
                 }
                 Task.WaitAll(t);
-                FileInfo f = new FileInfo(tempfile[0]);
+                FileInfo f = new FileInfo(tempfile.First());
                 string dir_path = f.DirectoryName;
                 return dir_path;
             }).ContinueWith((dir_path) =>
