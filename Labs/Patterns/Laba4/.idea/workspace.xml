@@ -34,8 +34,8 @@
       <file leaf-file-name="SimpleSolderFactory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Laba4/SimpleSolderFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="42" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="42" />
+            <state relative-caret-position="198">
+              <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -69,11 +69,11 @@
       <file leaf-file-name="Sailor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Laba4/Sailor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="308">
               <caret line="20" column="35" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="35" />
               <folding>
-                <element signature="e#296#297#0" expanded="true" />
-                <element signature="e#329#330#0" expanded="true" />
+                <element signature="e#370#371#0" expanded="true" />
+                <element signature="e#454#455#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -151,9 +151,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,6 +190,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -511,6 +511,65 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/Laba4/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/SimpleSolderFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Solder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding>
+            <element signature="method#Solder#0;class#Solder#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Pilot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="21" />
+          <folding>
+            <element signature="e#306#307#0" expanded="true" />
+            <element signature="e#342#343#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Sailor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Infantryman.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
           <folding />
@@ -551,8 +610,8 @@
         <state relative-caret-position="220">
           <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
           <folding>
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -610,8 +669,8 @@
         <state relative-caret-position="220">
           <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
           <folding>
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -670,8 +729,8 @@
         <state relative-caret-position="220">
           <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
           <folding>
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -730,8 +789,8 @@
         <state relative-caret-position="220">
           <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
           <folding>
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -758,17 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Sailor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="35" />
-          <folding>
-            <element signature="e#296#297#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Laba4/Infantryman.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -780,14 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Laba4/SimpleSolderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="42" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Laba4/Pilot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -796,6 +836,25 @@
             <element signature="e#306#307#0" expanded="true" />
             <element signature="e#342#343#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/Sailor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Laba4/SimpleSolderFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

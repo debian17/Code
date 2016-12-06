@@ -22,6 +22,5 @@ public class Main {
         for(int i=0;i<3;i++){
             solders[i].Serve();
         }
-        //solders[0].Att
     }
 }
