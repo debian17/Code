@@ -1,6 +1,5 @@
 #include <jni.h>
 #include <string>
-#include <org>
 
 using namespace std;
 
@@ -12,6 +11,6 @@ jstring Java_com_example_ndktest_MainActivity_stringFromJNI(JNIEnv *env, jobject
 
 extern "C"
 jstring Java_com_example_ndktest_MainActivity_somestringFromJNI(JNIEnv *env, jobject /* this */) {
-string hello = "My string";
-return env->NewStringUTF(hello.c_str());
+    string hello = "My string";
+    return env->NewStringUTF(hello.c_str());
 }
