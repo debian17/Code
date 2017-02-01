@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -7,132 +8,33 @@
     tools:context="com.example.laba1.MainActivity">
 
     <TextView
-        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/List_contact"
-        android:layout_alignParentTop="true"
+        android:text="Списко контактов"
+        android:id="@+id/Contact_list"
+        android:textSize="18dp"
         android:layout_centerHorizontal="true"
-        tools:text="@string/Maintext"
-        android:textStyle="normal|bold"
-        android:textSize="18sp"
-        android:fontFamily="monospace"
-        android:layout_marginBottom="50dp"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="7dp"/>
 
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RV_Items"
         android:layout_width="match_parent"
+        android:layout_below="@id/Contact_list"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:srcCompat="@android:drawable/ic_input_add"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="86dp">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/pic3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="19dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/contact3"
-            tools:text="@string/c3"
-            android:textStyle="normal|bold"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/pic3"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="14dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tc3"
-            tools:text="@string/tc3"
-            android:textSize="12sp"
-            android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/contact3" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/relativeLayout3"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="43dp">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/pic1"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="19dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/contact1"
-            tools:text="@string/c1"
-            android:textStyle="normal|bold"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/pic1"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="14dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tc1"
-            tools:text="@string/tc1"
-            android:textSize="12sp"
-            android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/contact1" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="59dp">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/pic2"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="19dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/contact2"
-            tools:text="@string/c2"
-            android:textStyle="normal|bold"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/pic2"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="14dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tc2"
-            tools:text="@string/tc2"
-            android:textSize="12sp"
-            android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/contact2" />
-
-    </RelativeLayout>
-
+        android:layout_alignParentEnd="true"
+        android:id="@+id/ActionButton"
+        app:elevation="0dp"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"/>
 
 </RelativeLayout>

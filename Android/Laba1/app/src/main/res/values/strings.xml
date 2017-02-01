@@ -1,10 +1,4 @@
 <resources>
     <string name="app_name">Laba1</string>
-    <string name="Maintext">Список контактов</string>
-    <string name="c1">Контакт1</string>
-    <string name="c2">Контакт2</string>
-    <string name="c3">Контакт3</string>
-    <string name="tc1">Некое сообщение от контакта №1</string>
-    <string name="tc2">Сообщение от контакта №2</string>
-    <string name="tc3">Сообщение от контакта №3</string>
+    <string name="c_list">Список контактов</string>
 </resources>
