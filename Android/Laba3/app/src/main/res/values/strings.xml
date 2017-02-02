@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Laba3</string>
+    <string name="hours">Часы</string>
+    <string name="minutes">Минуты</string>
+    <string name="seconds">Секунды</string>
+    <string name="stop">Стоп</string>
+    <string name="start">Старт</string>
+    <string name="time_over">Время ушло</string>
+</resources>
