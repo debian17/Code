@@ -17,7 +17,7 @@
         android:text="@string/B2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:onClick="SecondStart"
+        android:onClick="SecondStart (MainActivity)"
         android:textColor="@xml/button_text"
         android:id="@+id/button"
         android:background="@drawable/imgbtn"/>
