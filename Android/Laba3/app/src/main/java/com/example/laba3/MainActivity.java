@@ -16,80 +16,77 @@ public class MainActivity extends AppCompatActivity {
     private NumberPicker mSecondsPicker = null;
 
     private boolean mIsRun = false;
-    private int mResidue = 0;
     private final Handler mHandler = new Handler();
 
     private static final String IS_RUN_KEY = "IsRun";
-    private static final String RESIDUE_KEY = "Residue";
 
     private boolean mWasRunning = false;
     private static final String WAS_RUNNING_KEY = "WasRunning";
 
+    //при создании
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mStateToggleButton = (ToggleButton)findViewById(R.id.state_toggle_button);
         mHoursPicker = (NumberPicker)findViewById(R.id.hours_picker);
         mMinutesPicker = (NumberPicker)findViewById(R.id.minutes_picker);
         mSecondsPicker = (NumberPicker)findViewById(R.id.seconds_picker);
+
+        mHoursPicker.setEnabled(false);
+        mMinutesPicker.setEnabled(false);
+        mSecondsPicker.setEnabled(false);
+
         mHoursPicker.setMaxValue(24);
         mMinutesPicker.setMaxValue(59);
         mSecondsPicker.setMaxValue(59);
+
         if (savedInstanceState != null) {
-            mResidue = savedInstanceState.getInt(RESIDUE_KEY);
+            mSecondsPicker.setValue(savedInstanceState.getInt("s"));
+            mMinutesPicker.setValue(savedInstanceState.getInt("m"));
+            mHoursPicker.setValue(savedInstanceState.getInt("h"));
             mWasRunning = savedInstanceState.getBoolean(WAS_RUNNING_KEY);
             setRun(savedInstanceState.getBoolean(IS_RUN_KEY));
-            updateNumberPickers();
         }
     }
 
     private void setRun(boolean value) {
-        mHoursPicker.setEnabled(!value);
-        mMinutesPicker.setEnabled(!value);
-        mSecondsPicker.setEnabled(!value);
         mIsRun = value;
-        if (mIsRun){
+
+        if(mIsRun){
             mHandler.postDelayed(new TimerRunnable(), 1000);
         }
         mStateToggleButton.setChecked(value);
     }
 
-    private int calcResidue() {
-        return mSecondsPicker.getValue() + mMinutesPicker.getValue() * 60 +
-                mHoursPicker.getValue() * 60 * 60;
-    }
-
-
+    //
     private void updateNumberPickers() {
-        mHoursPicker.setValue(mResidue / (60 * 60));
-        mMinutesPicker.setValue((mResidue % (60 * 60)) / 60);
-        mSecondsPicker.setValue(mResidue % 60);
-    }
 
+        if(mSecondsPicker.getValue()<59){
+            mSecondsPicker.setValue(mSecondsPicker.getValue()+1);
+        }
+
+        if(mSecondsPicker.getValue()==59){
+            mSecondsPicker.setValue(0);
+            if(mMinutesPicker.getValue()==59){
+                mMinutesPicker.setValue(0);
+                mHoursPicker.setValue(mHoursPicker.getValue()+1);
+                return;
+            }
+        }
+
+        if(mMinutesPicker.getValue() == 59){
+            mMinutesPicker.setValue(0);
+            mHoursPicker.setValue(mHoursPicker.getValue()+1);
+        }
+    }
 
     private class TimerRunnable implements Runnable {
 
         @Override
         public void run() {
-            if (!mIsRun){
-                return;
-            }
-            mResidue = calcResidue();
-
-            if (mResidue > 0){
-                --mResidue;
-            }
-            if (mResidue == 0) {
-                Toast.makeText(
-                        MainActivity.this,
-                        getString(R.string.time_over),
-                        Toast.LENGTH_LONG)
-                        .show();
-
-                setRun(false);
-                return;
-            }
+            if(!mIsRun) return;
             updateNumberPickers();
             mHandler.postDelayed(this, 1000);
         }
@@ -99,31 +96,44 @@ public class MainActivity extends AppCompatActivity {
         setRun(mStateToggleButton.isChecked());
     }
 
+    //сохраняем текущее состояние
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mResidue = calcResidue();
-        outState.putInt(RESIDUE_KEY, mResidue);
+        outState.putInt("s", mSecondsPicker.getValue());
+        outState.putInt("m", mMinutesPicker.getValue());
+        outState.putInt("h", mHoursPicker.getValue());
         outState.putBoolean(IS_RUN_KEY, mIsRun);
         outState.putBoolean(WAS_RUNNING_KEY, mWasRunning);
     }
 
+    //активность полностью скрывается
     @Override
     protected void onStop() {
-        super.onPause();
-
+        //super.onPause();
+        super.onStop();
         if (mIsRun){
             mWasRunning = true;
         }
         setRun(false);
     }
 
+    //активность готова к отображению и становится видимой
     @Override
     protected void onStart() {
-        super.onResume();
+        //super.onResume();
+        super.onStart();
         if (mWasRunning) {
             setRun(true);
             mWasRunning = false;
         }
+    }
+
+    public void Reset(View view){
+        mSecondsPicker.setValue(0);
+        mMinutesPicker.setValue(0);
+        mHoursPicker.setValue(0);
+        mIsRun = false;
+        mStateToggleButton.setChecked(false);
     }
 }

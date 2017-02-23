@@ -71,18 +71,30 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
         >
+
         <ToggleButton
             android:id="@+id/state_toggle_button"
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_margin="14dp"
+            android:layout_centerHorizontal="true"
             android:textOn="@string/stop"
             android:textOff="@string/start"
             android:onClick="onClickStateButton"
             />
+
+        <Button
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/state_toggle_button"
+            android:text="Сброс"
+            android:onClick="Reset"
+            />
     </RelativeLayout>
+
+
+
 
 
 </RelativeLayout>
