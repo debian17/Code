@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lab_No1</string>
+    <string name="itemSenderName">Username</string>
+    <string name="itemText">Some random text</string>
+    <string name="titleTV">Dialogs list</string>
+</resources>
