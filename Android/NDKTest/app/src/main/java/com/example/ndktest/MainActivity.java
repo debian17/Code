@@ -64,9 +64,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private List<MatOfDMatch> matches;
     private float nndrRatio = 0.5f;
     private LinkedList<DMatch> goodMatchesList;
-    private DMatch[] dmatcharray;
-    private KeyPoint[] detect_keyPoints;
-    private KeyPoint[] descript_keyPoints;
     private Bitmap tempbitmap;
     private Drawable tempdrawable;
 
@@ -87,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         handler = new Handler(Looper.getMainLooper());
 
         featureDetector = FeatureDetector.create(FeatureDetector.ORB);
-        descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.BRISK);
-        descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.FLANNBASED);
+        descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.ORB);
+        descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
 
         CurFrame = new Mat();
         MarkDescriptor = new MatOfKeyPoint();
@@ -204,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        CurFrame = inputFrame.rgba();
+        //CurFrame = inputFrame.rgba();
 
         //Runnable r = new JThread(featureDetector,inputFrame.rgba(), SceneKeyPoints);
         //new Thread(r).start();
@@ -218,25 +215,24 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         //SceneKeyPoints.release();
         //верно
-        featureDetector.detect(inputFrame.rgba(), SceneKeyPoints);
+        featureDetector.detect(inputFrame.gray(), SceneKeyPoints);
         //detect_keyPoints = SceneKeyPoints.toArray();
-        Log.d("FD", Integer.toString(SceneKeyPoints.toArray().length));
+        //Log.d("FD", Integer.toString(SceneKeyPoints.toArray().length));
 
         //SceneDescriptor.release();
-        descriptorExtractor.compute(inputFrame.rgba(), SceneKeyPoints, SceneDescriptor);
-        //Log.d("DE", Integer.toString());
+        descriptorExtractor.compute(inputFrame.gray(), SceneKeyPoints, SceneDescriptor);
+        //Log.d("DE", Long.toString(SceneDescriptor.elemSize()));
 
         //handler.post(r);
-        Imgproc.cvtColor(CurFrame, CurFrame, Imgproc.COLOR_RGBA2RGB);
+        //Imgproc.cvtColor(CurFrame, CurFrame, Imgproc.COLOR_RGBA2RGB);
 
         //matches.clear();
         //descriptorMatcher.knnMatch(MarkDescriptor, matches, 2);
-        //descriptorMatcher.knnMatch(MarkDescriptor, SceneDescriptor, matches, 2);
+        descriptorMatcher.knnMatch(MarkDescriptor, SceneDescriptor, matches, 2);
+        //descriptorMatcher.knnMatch(Mat,Mat,List<MatOfDMatch>,int,);
 
         //Log.d("DM", Integer.toString(matches.size()));
 
-
-        /*
         for (int i = 0; i < matches.size(); i++) {
             MatOfDMatch matofDMatch = matches.get(i);
             DMatch[] dmatcharray = matofDMatch.toArray();
@@ -247,19 +243,16 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
             if (m1.distance <= m2.distance * nndrRatio) {
                 goodMatchesList.addLast(m1);
-                Log.d(LOG, "GOOD POINT++");
+                //Log.d(LOG, "GOOD POINT++");
             }
         }
 
         if(goodMatchesList.size() >= 3){
-            //Log.d("GOOD NEWS MOTHERFUCKA", "OBJECT FOUND!");
-        }*/
+            Log.d("GOOD NEWS", "OBJECT FOUND!");
+        }
 
+        //Features2d.drawKeypoints(CurFrame, SceneKeyPoints, CurFrame, keypointColor, 0);
 
-        Features2d.drawKeypoints(CurFrame, SceneKeyPoints, CurFrame, keypointColor, 0);
-
-        //imageView = (ImageView) findViewById(R.id.img);
-
-        return CurFrame;
+        return inputFrame.rgba();
     }
 }
