@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             editText.setHint(R.string.hint);
         }
         else{
-            Intent intent = new Intent(this,SecondActivity.class);
+            Intent intent = new Intent(this, SecondActivity.class);
             intent.putExtra("message",editText.getText().toString());
             startActivity(intent);
         }

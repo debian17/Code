@@ -17,12 +17,7 @@ public class SecondActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.message_text);
         Intent intent = getIntent();
         String message = intent.getStringExtra("message");
-        if(!message.equals("")){
-            textView.setText(message);
-        }
-        else {
-            textView.setText("NULL");
-        }
+        textView.setText(message);
     }
 
     public void OnClick_btn2(View view){
