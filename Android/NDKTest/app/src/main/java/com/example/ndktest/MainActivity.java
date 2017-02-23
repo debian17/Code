@@ -1,29 +1,22 @@
 package com.example.ndktest;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.media.Image;
-import android.media.ImageReader;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraGLSurfaceView;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
+import org.opencv.android.Utils;
 import org.opencv.core.DMatch;
 import org.opencv.core.KeyPoint;
 import org.opencv.core.Mat;
@@ -34,14 +27,9 @@ import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import static org.opencv.imgcodecs.Imgcodecs.CV_LOAD_IMAGE_UNCHANGED;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     // Used to load the 'native-lib' library on application startup.
@@ -50,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //System.loadLibrary("nonfree");
         System.loadLibrary("opencv_java3");
     }
-    private String LOG = "MY_LOG INFO";
 
+    private String LOG = "MY_LOG INFO";
 
     private FeatureDetector featureDetector;
     private CameraBridgeViewBase mOpenCvCameraView;
@@ -79,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private DMatch[] dmatcharray;
     private KeyPoint[] detect_keyPoints;
     private KeyPoint[] descript_keyPoints;
+    private Bitmap tempbitmap;
+    private Drawable tempdrawable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +83,11 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView.setCvCameraViewListener(this);
         mOpenCvCameraView.setMaxFrameSize(1200,1600);
         //mOpenCvCameraView.enableFpsMeter();
-        //textView = (TextView) findViewById(R.id.textView);
+
         handler = new Handler(Looper.getMainLooper());
 
-        featureDetector = FeatureDetector.create(FeatureDetector.GRID_ORB);
-        descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.ORB);
+        featureDetector = FeatureDetector.create(FeatureDetector.ORB);
+        descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.BRISK);
         descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.FLANNBASED);
 
         CurFrame = new Mat();
@@ -105,7 +96,21 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         keypointColor = new Scalar(255, 0, 0);
         SceneKeyPoints = new MatOfKeyPoint();
         MarkKeyPoints = new MatOfKeyPoint();
-        Mark = Imgcodecs.imread("book.jpg");
+
+
+        //Mark = Imgcodecs.imread("book.jpg");
+        Mark = new Mat();
+        tempdrawable = getResources().getDrawable(R.drawable.test);
+        tempbitmap = ((BitmapDrawable) tempdrawable).getBitmap();
+        Utils.bitmapToMat(tempbitmap, Mark);
+
+        if(Mark.empty()){
+            Log.d("MARK_ONFO", "BAD NEWS MATHERFUCKA");
+            finish();
+        }
+        else{
+            Log.d("MARK_ONFO", "NOT EMPTY");
+        }
 
         //int res = getResources().getIdentifier("book.jpg", "drawable", this.getPackageName());
         //Log.d("RESULT = ", Integer.toString(res));
@@ -114,12 +119,24 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         goodMatchesList = new LinkedList<DMatch>();
         //DMatch[] dmatcharray = new DMatch[];
 
-        params = new Params();
+        //params = new Params();
 
+        //верно
         featureDetector.detect(Mark, MarkKeyPoints);
-        Log.d("FD_BOOK", Long.toString(MarkKeyPoints.elemSize()));
+
+        if(MarkKeyPoints.empty()){
+            Log.d("MARKKEYPOINTS", "BAD NEWS MATHERFUCKA");
+            finish();
+        }
+
+        Log.d("FD_BOOK", Integer.toString(MarkKeyPoints.toArray().length));
 
         descriptorExtractor.compute(Mark, MarkKeyPoints, MarkDescriptor);
+        if(MarkDescriptor.empty()){
+            Log.d("MARKDESCRIPTOR", "BAD NEWS MATHERFUCKA");
+            finish();
+        }
+
         Log.d("DE_BOOK", Long.toString(MarkDescriptor.elemSize()));
 
         // Create the matrix for output image.
@@ -188,10 +205,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         CurFrame = inputFrame.rgba();
-        SceneKeyPoints.release();
-        SceneDescriptor.release();
-        matches.clear();
-        goodMatchesList.clear();
 
         //Runnable r = new JThread(featureDetector,inputFrame.rgba(), SceneKeyPoints);
         //new Thread(r).start();
@@ -203,21 +216,27 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         taskAsync.execute(params);
         //taskAsync.execute(params);*/
 
-        featureDetector.detect(CurFrame, SceneKeyPoints);
+        //SceneKeyPoints.release();
+        //верно
+        featureDetector.detect(inputFrame.rgba(), SceneKeyPoints);
         //detect_keyPoints = SceneKeyPoints.toArray();
         Log.d("FD", Integer.toString(SceneKeyPoints.toArray().length));
 
-        descriptorExtractor.compute(CurFrame, SceneKeyPoints, SceneDescriptor);
-        //Log.d("DE", Integer.toString(8));
-        //Log.d("DE", Long.toString(SceneDescriptor.elemSize()));
+        //SceneDescriptor.release();
+        descriptorExtractor.compute(inputFrame.rgba(), SceneKeyPoints, SceneDescriptor);
+        //Log.d("DE", Integer.toString());
 
         //handler.post(r);
-        //Imgproc.cvtColor(CurFrame, CurFrame, Imgproc.COLOR_RGBA2RGB);
+        Imgproc.cvtColor(CurFrame, CurFrame, Imgproc.COLOR_RGBA2RGB);
 
-        descriptorMatcher.knnMatch(MarkDescriptor, SceneDescriptor, matches, 2);
+        //matches.clear();
+        //descriptorMatcher.knnMatch(MarkDescriptor, matches, 2);
+        //descriptorMatcher.knnMatch(MarkDescriptor, SceneDescriptor, matches, 2);
 
         //Log.d("DM", Integer.toString(matches.size()));
 
+
+        /*
         for (int i = 0; i < matches.size(); i++) {
             MatOfDMatch matofDMatch = matches.get(i);
             DMatch[] dmatcharray = matofDMatch.toArray();
@@ -234,11 +253,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         if(goodMatchesList.size() >= 3){
             //Log.d("GOOD NEWS MOTHERFUCKA", "OBJECT FOUND!");
-        }
+        }*/
 
 
-        //Features2d.drawKeypoints(CurFrame, SceneKeyPoints, CurFrame, keypointColor, 0);
+        Features2d.drawKeypoints(CurFrame, SceneKeyPoints, CurFrame, keypointColor, 0);
 
-        return inputFrame.rgba();
+        //imageView = (ImageView) findViewById(R.id.img);
+
+        return CurFrame;
     }
 }

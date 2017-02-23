@@ -19,4 +19,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="Start_MainActivity" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/img"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
