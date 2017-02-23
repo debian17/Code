@@ -14,7 +14,7 @@ Platform assembly: C:\GitHub\Labs\OpenGL\Unity\Laba2\1_Data\Managed\UnityEngine.
 Loading C:\GitHub\Labs\OpenGL\Unity\Laba2\1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\GitHub\Labs\OpenGL\Unity\Laba2\1_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\GitHub\Labs\OpenGL\Unity\Laba2\1_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.049 seconds
+- Completed reload, in  0.158 seconds
 Platform assembly: C:\GitHub\Labs\OpenGL\Unity\Laba2\1_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\GitHub\Labs\OpenGL\Unity\Laba2\1_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
