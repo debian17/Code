@@ -7,27 +7,38 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraGLSurfaceView;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
+import org.opencv.calib3d.Calib3d;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.DMatch;
 import org.opencv.core.KeyPoint;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDMatch;
 import org.opencv.core.MatOfKeyPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.features2d.Features2d;
 import org.opencv.imgproc.Imgproc;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -62,11 +73,20 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Params params;
     private DescriptorMatcher descriptorMatcher;
     private List<MatOfDMatch> matches;
-    private float nndrRatio = 0.5f;
+
     private LinkedList<DMatch> goodMatchesList;
     private Bitmap tempbitmap;
     private Drawable tempdrawable;
 
+    private Integer length;
+    private MatOfDMatch matofDMatch;
+    private DMatch m1;
+    private DMatch m2;
+
+    private double max_dist = 0;
+    private double min_dist = 100;
+
+    private float nndrRatio = 0.8f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         handler = new Handler(Looper.getMainLooper());
 
-        featureDetector = FeatureDetector.create(FeatureDetector.ORB);
+        featureDetector = FeatureDetector.create(FeatureDetector.GRID_ORB);
         descriptorExtractor = DescriptorExtractor.create(DescriptorExtractor.ORB);
-        descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+        descriptorMatcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE);
 
         CurFrame = new Mat();
         MarkDescriptor = new MatOfKeyPoint();
@@ -93,11 +113,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         keypointColor = new Scalar(255, 0, 0);
         SceneKeyPoints = new MatOfKeyPoint();
         MarkKeyPoints = new MatOfKeyPoint();
-
+        matofDMatch = new MatOfDMatch();
+        m1 = new DMatch();
+        m2 = new DMatch();
 
         //Mark = Imgcodecs.imread("book.jpg");
         Mark = new Mat();
-        tempdrawable = getResources().getDrawable(R.drawable.test);
+        tempdrawable = getResources().getDrawable(R.drawable.mark2);
         tempbitmap = ((BitmapDrawable) tempdrawable).getBitmap();
         Utils.bitmapToMat(tempbitmap, Mark);
 
@@ -201,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        //CurFrame = inputFrame.rgba();
+        CurFrame = inputFrame.rgba();
 
         //Runnable r = new JThread(featureDetector,inputFrame.rgba(), SceneKeyPoints);
         //new Thread(r).start();
@@ -215,44 +237,126 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         //SceneKeyPoints.release();
         //верно
-        featureDetector.detect(inputFrame.gray(), SceneKeyPoints);
+        featureDetector.detect(inputFrame.rgba(), SceneKeyPoints);
         //detect_keyPoints = SceneKeyPoints.toArray();
-        //Log.d("FD", Integer.toString(SceneKeyPoints.toArray().length));
+        Log.d("FD", Double.toString(SceneKeyPoints.toArray()[0].pt.x));
 
         //SceneDescriptor.release();
-        descriptorExtractor.compute(inputFrame.gray(), SceneKeyPoints, SceneDescriptor);
+        descriptorExtractor.compute(inputFrame.rgba(), SceneKeyPoints, SceneDescriptor);
         //Log.d("DE", Long.toString(SceneDescriptor.elemSize()));
 
         //handler.post(r);
-        //Imgproc.cvtColor(CurFrame, CurFrame, Imgproc.COLOR_RGBA2RGB);
+        Imgproc.cvtColor(CurFrame, CurFrame, Imgproc.COLOR_RGBA2RGB);
 
-        //matches.clear();
+        matches.clear();
         //descriptorMatcher.knnMatch(MarkDescriptor, matches, 2);
-        descriptorMatcher.knnMatch(MarkDescriptor, SceneDescriptor, matches, 2);
+        try{
+            descriptorMatcher.knnMatch(MarkDescriptor, SceneDescriptor, matches, 2);
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+
         //descriptorMatcher.knnMatch(Mat,Mat,List<MatOfDMatch>,int,);
 
         //Log.d("DM", Integer.toString(matches.size()));
 
-        for (int i = 0; i < matches.size(); i++) {
-            MatOfDMatch matofDMatch = matches.get(i);
-            DMatch[] dmatcharray = matofDMatch.toArray();
-            DMatch m1 = dmatcharray[0];
-            DMatch m2 = dmatcharray[1];
+        /*
+        matofDMatch.alloc(0);
+        goodMatchesList.clear();
+        length = MarkDescriptor.rows();
+        try{
+            for(int i =0; i<length;i++){
+                if(matches.get(i).toArray()[0].distance < min_dist){
+                    min_dist = matches.get(i).toArray()[0].distance;
+                }
+            }
 
-            //Log.d(LOG, "PROCESSING POINT");
-
-            if (m1.distance <= m2.distance * nndrRatio) {
-                goodMatchesList.addLast(m1);
-                //Log.d(LOG, "GOOD POINT++");
+            for(int i=0; i<length;i++){
+                if(matches.get(i).toArray()[0].distance < 2*min_dist){
+                    goodMatchesList.add(matches.get(i).toArray()[0]);
+                }
             }
         }
-
-        if(goodMatchesList.size() >= 3){
-            Log.d("GOOD NEWS", "OBJECT FOUND!");
+        catch (Exception e){
+            e.getMessage();
         }
 
-        //Features2d.drawKeypoints(CurFrame, SceneKeyPoints, CurFrame, keypointColor, 0);
+        if(goodMatchesList.size() >= 450){
+            Log.d("GOOD NEWS", "OBJECT FOUND!");
+        }*/
 
-        return inputFrame.rgba();
+        matofDMatch.alloc(0);
+        goodMatchesList.clear();
+        length = matches.size();
+        try{
+            for (int i = 0; i < length; i++) {
+                matofDMatch = matches.get(i);
+                m1 = matofDMatch.toArray()[0];
+                m2 = matofDMatch.toArray()[1];
+
+                //Log.d(LOG, "PROCESSING POINT");
+
+                if (m1.distance <= m2.distance * nndrRatio) {
+                    goodMatchesList.addLast(m1);
+                    //Log.d(LOG, "GOOD POINT++");
+                }
+            }
+        }
+        catch (Exception e){
+            e.getMessage();
+        }
+
+        if(goodMatchesList.size() >=3) {
+            Log.d("GOOD NEWS", "OBJECT FOUND!");
+
+            //верно
+            List<KeyPoint> objKeypointlist = MarkKeyPoints.toList();
+            List<KeyPoint> scnKeypointlist = SceneKeyPoints.toList();
+
+            LinkedList<Point> objectPoints = new LinkedList<>();
+            LinkedList<Point> scenePoints = new LinkedList<>();
+
+            for (int i = 0; i < goodMatchesList.size(); i++) {
+                objectPoints.addLast(objKeypointlist.get(goodMatchesList.get(i).queryIdx).pt);
+                scenePoints.addLast(scnKeypointlist.get(goodMatchesList.get(i).trainIdx).pt);
+            }
+
+            MatOfPoint2f objMatOfPoint2f = new MatOfPoint2f();
+            objMatOfPoint2f.fromList(objectPoints);
+            MatOfPoint2f scnMatOfPoint2f = new MatOfPoint2f();
+            scnMatOfPoint2f.fromList(scenePoints);
+
+            Mat homography = Calib3d.findHomography(objMatOfPoint2f, scnMatOfPoint2f, Calib3d.RANSAC, 3);
+
+            Mat obj_corners = new Mat(4, 1, CvType.CV_32FC2);
+            Mat scene_corners = new Mat(4, 1, CvType.CV_32FC2);
+
+            obj_corners.put(0, 0, new double[]{0, 0});
+            obj_corners.put(1, 0, new double[]{Mark.cols(), 0});
+            obj_corners.put(2, 0, new double[]{Mark.cols(), Mark.rows()});
+            obj_corners.put(3, 0, new double[]{0, Mark.rows()});
+
+            try{
+                Core.perspectiveTransform(obj_corners, scene_corners, homography);
+            }
+            catch (Exception e){
+                e.getMessage();
+            }
+
+            //Mat img = Highgui.imread(bookScene, Highgui.CV_LOAD_IMAGE_COLOR);
+
+            Imgproc.line(CurFrame, new Point(scene_corners.get(0, 0)), new Point(scene_corners.get(1, 0)), new Scalar(0, 255, 0));
+            Imgproc.line(CurFrame, new Point(scene_corners.get(1, 0)), new Point(scene_corners.get(2, 0)), new Scalar(0, 255, 0));
+            Imgproc.line(CurFrame, new Point(scene_corners.get(2, 0)), new Point(scene_corners.get(3, 0)), new Scalar(0, 255, 0));
+            Imgproc.line(CurFrame, new Point(scene_corners.get(3, 0)), new Point(scene_corners.get(0, 0)), new Scalar(0, 255, 0));
+
+            //Imgproc.line(CurFrame, new Point(0,0), new Point(0,1000), keypointColor);
+        }
+
+        //MatOfKeyPoint r = new MatOfKeyPoint();
+        Features2d.drawKeypoints(CurFrame, SceneKeyPoints, CurFrame, keypointColor, 0);
+
+        return CurFrame;
     }
 }
