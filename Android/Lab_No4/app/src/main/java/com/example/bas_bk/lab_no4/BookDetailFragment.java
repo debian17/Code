@@ -52,8 +52,6 @@ public class BookDetailFragment extends Fragment {
             }
         });
 
-
-
         clickMe.setText("Удалить");
         if (book.deleted) {
             clickMe.setText("Восстановить");
