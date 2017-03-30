@@ -8,6 +8,11 @@ import java.util.Date;
 
 public class Task {
 
+    public static final String TABLE_NAME = "tasks_table";
+    public static final String NAME = "name";
+    public static final String DATE = "date";
+    public static final String DESCRIPTION = "description";
+
     private String name_task;
     private String date;
     private String description;

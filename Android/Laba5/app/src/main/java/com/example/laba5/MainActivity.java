@@ -1,9 +1,12 @@
 package com.example.laba5;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +18,13 @@ public class MainActivity extends AppCompatActivity {
     private RVAdapter rvAdapter;
     private LinearLayoutManager linearLayoutManager;
     private List<Task> tasks;
+    private TaskCursorWrapper taskCursorWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Cursor cursor = TaskManager.mDatabase.query(Task.TABLE_NAME,)
 
         tasks = new ArrayList<Task>();
 
@@ -37,4 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(rvAdapter);
     }
+
+    public void onAddClick(View view){
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+    }
+
 }
