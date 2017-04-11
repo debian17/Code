@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">ActivityTest</string>
-    <string name="B1">Go to MainActivity</string>
-    <string name="B2">Go to SecondActivity</string>
-    <string name="B3">Go to ThirdActivity</string>
-</resources>
